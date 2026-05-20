@@ -167,8 +167,8 @@ Navigation via **Bottom Navigation Bar** (mobil-optimiert) mit drei Punkten: Hom
 
 | | Testperson 1 | Testperson 2 |
 |---|---|---|
-| **Code** | TP-01 | TP-02 |
-| **Profil** | Mann, 22 J., Fussball-Fan, tippt regelmässig bei Freunden | Mann, 24 J., wenig Erfahrung mit Tipp-Apps, spielt Padel |
+| **Name/Code** | Enis (TP-01) | Drin (TP-02) |
+| **Profil** | Mann, 25 J., Fussball-Fan, tippt regelmässig bei Freunden | Mann, 24 J., wenig Erfahrung mit Tipp-Apps, spielt Padel |
 | **Gerät** | Smartphone (iPhone) | Notebook (Chrome) |
 | **Datum** | 20.05.2026 | 20.05.2026 |
 
@@ -197,10 +197,10 @@ Navigation via **Bottom Navigation Bar** (mobil-optimiert) mit drei Punkten: Hom
 
 | | **Aufgabe 1** (Spielübersicht) | **Aufgabe 2** (Tipp abgeben) | **Aufgabe 3** (Rangliste) |
 |---|---|---|---|
-| **TP-01** | Findet Spieltag-Tab sofort via Bottom Nav (8 Sek.) ✅ | Gibt Tipp korrekt ein, zögert kurz bei Namensfeld («Muss ich mich anmelden?») ✅ | Findet Rangliste sofort, versteht Trend-Pfeile ✅ |
-| **TP-02** | Sucht zuerst auf der Startseite, findet Spieltag erst im zweiten Versuch (22 Sek.) ⚠️ | Gibt falsche Werte ein (vertauscht Heim/Auswärts), korrigiert sich selbst ⚠️ | Versteht «Man of the Matchday» nicht sofort, fragt nach ⚠️ |
+| **Enis (TP-01)** | Findet Spieltag-Tab sofort via Bottom Nav (8 Sek.) ✅ | Gibt Tipp korrekt ein, zögert kurz bei Namensfeld («Muss ich mich anmelden?») ✅ | Findet Rangliste sofort, versteht Trend-Pfeile ✅ |
+| **Drin (TP-02)** | Sucht zuerst auf der Startseite, findet Spieltag erst im zweiten Versuch (22 Sek.) ⚠️ | Gibt falsche Werte ein (vertauscht Heim/Auswärts), korrigiert sich selbst ⚠️ | Versteht «Man of the Matchday» nicht sofort, fragt nach ⚠️ |
 
-**Feedback Grid – TP-01:**
+**Feedback Grid – Enis (TP-01):**
 
 | 😊 Was hat gut funktioniert / gefallen | 😞 Was hat nicht funktioniert / gestört |
 |---|---|
@@ -213,7 +213,7 @@ Navigation via **Bottom Navigation Bar** (mobil-optimiert) mit drei Punkten: Hom
 | Push-Notification wenn Freund tippt | Was passiert wenn Anpfiff? Kann ich noch ändern? |
 | Emoji-Reaktionen auf Tipps | Bedeutung von «Man of the Matchday» unklar |
 
-**Feedback Grid – TP-02:**
+**Feedback Grid – Drin (TP-02):**
 
 | 😊 Was hat gut funktioniert / gefallen | 😞 Was hat nicht funktioniert / gestört |
 |---|---|
@@ -232,8 +232,8 @@ Navigation via **Bottom Navigation Bar** (mobil-optimiert) mit drei Punkten: Hom
 
 | | **Spieltag finden** | **Tipp abgeben** | **Rangliste lesen** |
 |---|---|---|---|
-| **TP-01** | – | Kein Speicher-Feedback (Schweregrad: **3**) | «Man of the Matchday» unklar (Schweregrad: **2**) |
-| **TP-02** | Nav-Tab nicht sofort gefunden (Schweregrad: **2**) | Heim/Auswärts vertauscht (Schweregrad: **3**) | «Brag-Points» ≠ Punkte unklar (Schweregrad: **2**) |
+| **Enis (TP-01)** | – | Kein Speicher-Feedback (Schweregrad: **3**) | «Man of the Matchday» unklar (Schweregrad: **2**) |
+| **Drin (TP-02)** | Nav-Tab nicht sofort gefunden (Schweregrad: **2**) | Heim/Auswärts vertauscht (Schweregrad: **3**) | «Brag-Points» ≠ Punkte unklar (Schweregrad: **2**) |
 
 **Schweregrad-Skala:** 0 = Kein Problem | 1 = Kosmetisch | 2 = Kleine Priorität | 3 = Hohe Priorität | 4 = Katastrophe
 
