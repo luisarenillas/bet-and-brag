@@ -1,19 +1,17 @@
 import { MongoClient } from 'mongodb';
-import { env } from '$env/dynamic/private';
 
 let client: MongoClient | null = null;
 
 export async function getDb() {
+	const uri = process.env.MONGODB_URI;
+	if (!uri) throw new Error('MONGODB_URI is not defined');
+
 	if (!client) {
-		client = new MongoClient(env.MONGODB_URI, {
+		client = new MongoClient(uri, {
 			serverSelectionTimeoutMS: 5000,
 			connectTimeoutMS: 10000
 		});
-	}
-	try {
 		await client.connect();
-	} catch {
-		// Already connected, ignore
 	}
 	return client.db('bet-and-brag');
 }
