@@ -142,6 +142,17 @@ function persist(key, fallback) {
   };
 }
 
+// ── DATA VERSION CHECK: clear stale localStorage if match data changed ────────
+const DATA_VERSION = 'v3'; // bump this whenever MATCHES or INITIAL_USERS change
+if (typeof localStorage !== 'undefined') {
+  const storedVersion = localStorage.getItem('bb_data_version');
+  if (storedVersion !== DATA_VERSION) {
+    // Wipe all game data so the new MATCHES / gems take effect
+    ['bb_matches', 'bb_tips', 'bb_users'].forEach(k => localStorage.removeItem(k));
+    localStorage.setItem('bb_data_version', DATA_VERSION);
+  }
+}
+
 // ── MIGRATION: sync persisted names with INITIAL_USERS ───────────────────────
 if (typeof localStorage !== 'undefined') {
   try {

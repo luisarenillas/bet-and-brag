@@ -199,6 +199,7 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(ellipse at 50% 0%, rgba(0,210,106,0.06), transparent 70%);
+    pointer-events: none;
   }
 
   .match-header {
