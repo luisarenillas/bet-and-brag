@@ -44,43 +44,33 @@
   <text x="219" y="362" fill="#8888aa" font-size="10" font-weight="700" letter-spacing="1">SIMULIERT</text>
   <text x="219" y="394" fill="#8888aa" font-size="26" font-weight="900">0</text>
 
-  <!-- SIMULATE BUTTON -->
-  <rect x="16" y="422" width="358" height="52" rx="14" fill="url(#simGrad)"/>
-  <defs>
-    <linearGradient id="simGrad" x1="0" y1="0" x2="358" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#7c3aed"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
-    </linearGradient>
-  </defs>
-  <text x="130" y="453" fill="#ffffff" font-size="15" font-weight="800">⚽ Spiel simulieren</text>
-
   <!-- LEADERBOARD PREVIEW -->
-  <text x="16" y="500" fill="#ffffff" font-size="14" font-weight="800">👑 Top 3 Rangliste</text>
-  <text x="310" y="500" fill="#00d26a" font-size="12" font-weight="600">Alle →</text>
+  <text x="16" y="440" fill="#ffffff" font-size="14" font-weight="800">👑 Top 3 Rangliste</text>
+  <text x="310" y="440" fill="#00d26a" font-size="12" font-weight="600">Alle →</text>
 
   <!-- Row 1 -->
-  <rect x="16" y="510" width="358" height="50" rx="12" fill="rgba(255,215,0,0.05)" stroke="rgba(255,215,0,0.1)" stroke-width="1"/>
-  <text x="32" y="541" fill="#ffd700" font-size="18">🥇</text>
-  <text x="60" y="535" fill="#ffffff" font-size="14" font-weight="700">🧔 Luis</text>
-  <text x="60" y="551" fill="#8888aa" font-size="11">0 Tipps</text>
-  <text x="318" y="541" fill="#00d26a" font-size="14" font-weight="800">100</text>
-  <text x="335" y="541" fill="#555577" font-size="11">➖</text>
+  <rect x="16" y="450" width="358" height="50" rx="12" fill="rgba(255,215,0,0.05)" stroke="rgba(255,215,0,0.1)" stroke-width="1"/>
+  <text x="32" y="481" fill="#ffd700" font-size="18">🥇</text>
+  <text x="60" y="475" fill="#ffffff" font-size="14" font-weight="700">🧔 Luis</text>
+  <text x="60" y="491" fill="#8888aa" font-size="11">0 Tipps</text>
+  <text x="318" y="481" fill="#00d26a" font-size="14" font-weight="800">100</text>
+  <text x="335" y="481" fill="#555577" font-size="11">➖</text>
 
   <!-- Row 2 -->
-  <rect x="16" y="566" width="358" height="50" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-  <text x="32" y="597" fill="#c0c0c0" font-size="18">🥈</text>
-  <text x="60" y="591" fill="#ffffff" font-size="14" font-weight="700">👨 Pablo</text>
-  <text x="60" y="607" fill="#8888aa" font-size="11">0 Tipps</text>
-  <text x="318" y="597" fill="#00d26a" font-size="14" font-weight="800">100</text>
-  <text x="335" y="597" fill="#555577" font-size="11">➖</text>
+  <rect x="16" y="506" width="358" height="50" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <text x="32" y="537" fill="#c0c0c0" font-size="18">🥈</text>
+  <text x="60" y="531" fill="#ffffff" font-size="14" font-weight="700">👨 Pablo</text>
+  <text x="60" y="547" fill="#8888aa" font-size="11">0 Tipps</text>
+  <text x="318" y="537" fill="#00d26a" font-size="14" font-weight="800">100</text>
+  <text x="335" y="537" fill="#555577" font-size="11">➖</text>
 
   <!-- Row 3 -->
-  <rect x="16" y="622" width="358" height="50" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-  <text x="32" y="653" fill="#cd7f32" font-size="18">🥉</text>
-  <text x="60" y="647" fill="#ffffff" font-size="14" font-weight="700">🧑 Levin</text>
-  <text x="60" y="663" fill="#8888aa" font-size="11">0 Tipps</text>
-  <text x="318" y="653" fill="#00d26a" font-size="14" font-weight="800">100</text>
-  <text x="335" y="653" fill="#555577" font-size="11">➖</text>
+  <rect x="16" y="562" width="358" height="50" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <text x="32" y="593" fill="#cd7f32" font-size="18">🥉</text>
+  <text x="60" y="587" fill="#ffffff" font-size="14" font-weight="700">🧑 Levin</text>
+  <text x="60" y="603" fill="#8888aa" font-size="11">0 Tipps</text>
+  <text x="318" y="593" fill="#00d26a" font-size="14" font-weight="800">100</text>
+  <text x="335" y="593" fill="#555577" font-size="11">➖</text>
 
   <!-- BOTTOM NAV -->
   <rect y="756" width="390" height="88" fill="rgba(20,20,40,0.97)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
