@@ -19,19 +19,42 @@
 
 ## 1. Ausgangslage
 
-- **Problem:** In Freundesgruppen (Fussballclub, Gym, Arbeitsumfeld) werden Sportergebnisse regelmässig informell gewettet. Bestehende Plattformen sind entweder mit echtem Geld verknüpft, was rechtliche Graubereiche erzeugt, oder sie sind zu komplex und mit Werbung überladen für kleine Privatgruppen. Eine einfache, soziale und rechtlich unbedenkliche Lösung fehlt.
-- **Ziele:** Entwicklung einer webbasierten App, in der eine geschlossene Gruppe Tipps für Fussballspiele abgeben kann. Statt echtem Geld wird eine Fantasiewährung («Brag-Points») eingesetzt. Im Vordergrund steht der soziale Wettbewerb und das «Bragging Right» – das Recht zum Angeben.
-- **Primäre Zielgruppe:** Sportbegeisterte Freunde und Teamkollegen im Alter von 18–35 Jahren, die regelmässig Fussball schauen und sich untereinander messen wollen.
+- **Problem:** In Freundesgruppen entstehen rund um Sportereignisse wie die FIFA Weltmeisterschaft spontane Tipprunden. Bestehende Lösungen (WhatsApp-Umfragen, Excel-Sheets, kommerzielle Wettplattformen) sind entweder zu unstrukturiert, nicht gamifiziert oder bewegen sich rechtlich im Graubereich von Geldspielen. Es fehlt eine leichtgewichtige, private App, die den sozialen Wettbewerb spielerisch abbildet – ohne Echtgeld und ohne externe Konten.
+
+- **Ziele:**
+  - Private WM-Tipprunde für eine feste Gruppe von Freunden digitalisieren
+  - Spielerische Motivation durch eine fiktive Währung («Football Gems») statt Echtgeld
+  - Vollständig interaktiver Prototyp: Tipps abgeben, Spiele simulieren, Rangliste live aktualisieren
+  - Mobile-First, sofort deploybar, keine externe Datenbankabhängigkeit
+
+- **Primäre Zielgruppe:** Junge Erwachsene (18–30 Jahre), Fussball-Fans, die die WM 2026 in einer Freundesgruppe gemeinsam verfolgen und einen spielerischen Wettbewerb veranstalten möchten.
+
+- **Weitere Stakeholder:** Keine kommerziellen Stakeholder; die App ist explizit nicht-monetär und bleibt im privaten Rahmen.
 
 ---
 
 ## 2. Lösungsidee
 
 - **Kernfunktionalität:**
-  - **Tipp abgeben (Hauptworkflow):** Nutzer wählt ein Spiel aus, gibt ein Resultat ein und speichert es in der Datenbank.
-  - **Rangliste ansehen:** Dynamische Tabelle mit Punktestand, Spieltagssieger und Trend-Indikatoren (↑ ↓).
-  - **Spieltag-Übersicht:** Alle Spiele der Woche auf einen Blick, mit Status (Offen / Live / Beendet).
-- **Abgrenzung:** Kein echtes Geld, keine externe API-Anbindung für Live-Ergebnisse (Daten werden manuell gepflegt). Kein Login-System – Nutzer geben ihren Namen direkt bei der Tipp-Abgabe ein.
+  1. **Dashboard** – Countdown zur WM, Eröffnungsspiel-Karte, Live-Simulations-Button, Leaderboard-Vorschau
+  2. **WM-Spieltag** – Alle 72 Gruppenspiele (12 Gruppen A–L, 48 Teams), Filter-Tabs, Tipp abgeben oder bearbeiten
+  3. **Tipp-Abgabe** – Score-Eingabe mit ±-Buttons, fixe 10 Gems Einsatz, Auszahlungsübersicht, Speichern
+  4. **Turnierbaum** – Gruppenstandings live, K.o.-Bracket mit klickbaren Picks (Achtelfinale → Finale)
+  5. **Rangliste («Bragging Rights»)** – 10 Freunde, sortiert nach Football Gems, mit Zonen und Trend-Indikatoren
+  6. **Profil** – Persönliche Stats, Spielregeln, App-Reset
+
+- **Gems-System:**
+  | Ereignis | Gems |
+  |----------|------|
+  | Tipp abgeben (Einsatz) | −10 |
+  | Tendenz richtig | +20 |
+  | Exaktes Ergebnis | +30 |
+  | Tipp falsch | +0 (Einsatz verloren) |
+  | Startguthaben | 100 |
+
+- **Annahmen:** Nutzer sind motivierter, wenn sie eine virtuelle Währung auf dem Spiel haben, als wenn es nur Punkte gibt. Der soziale Vergleich (Rangliste mit Zonen) erhöht die Bindung.
+
+- **Abgrenzung:** Keine echten Benutzerkonto-Registrierung, kein Echtgeld, keine Server-seitige Persistenz (localStorage), keine Push-Notifications.
 
 ---
 
@@ -39,64 +62,98 @@
 
 ### 3.1 Understand & Define
 
-**Problemräume:**
-Bestehende Tipp-Plattformen sind für private Gruppen zu komplex oder auf kommerzielles Glücksspiel ausgelegt. Es fehlt eine minimalistische Lösung für den rein sozialen Wettbewerb.
+**Problemraum:** Freundesgruppen wollen WM-Tipprunden organisieren, ohne auf unpraktische Lösungen angewiesen zu sein. Beobachtung: In der eigenen Gruppe wurden Tipps über WhatsApp gesammelt und manuell ausgewertet – fehleranfällig und wenig motivierend.
 
-**Nutzer / Bedürfnisse / Kontext:**
-- Nutzer sind Fussballfans in privaten Gruppen (Freunde, Arbeitskollegen, Vereinsmitglieder).
-- Bedürfnis: Schnelle Tipp-Abgabe (< 10 Sekunden), sofortiger Überblick über die Rangliste.
-- Kontext: Mobil, spontan, kurz vor oder während Spieltagen.
+**Persona – Primär:**
+> **Luis, 24, Student**  
+> Schaut jedes WM-Spiel mit Freunden. Tippt gerne auf Ergebnisse, aber bestehende Apps sind zu kompliziert oder erfordern Anmeldung. Wünscht sich etwas Schnelles, Visuelles, das er sofort mit Freunden teilen kann.
 
-**How Might We (HMW):**
-- HMW… eine Tipp-App gestalten, die durch eine Fantasiewährung denselben Nervenkitzel wie echte Einsätze bietet, ohne die Risiken von Glücksspiel?
-- HMW… die Rangliste so visualisieren, dass der soziale Status («König der Woche») maximal hervorgehoben wird?
-- HMW… die Tippabgabe so einfach gestalten, dass sie in weniger als 10 Sekunden abgeschlossen ist?
+**Persona – Sekundär:**
+> **Jasmin, 24, Studentin**  
+> Gelegentliche Fussball-Zuschauerin. Beteiligt sich an der Runde wegen des sozialen Spassfaktors, nicht wegen des Sports. Braucht eine intuitive, niederschwellige Oberfläche.
 
 **Wesentliche Erkenntnisse:**
-- Die Echtgeld-Problematik ist ein reales Hindernis – eine Fantasiewährung löst dies elegant.
-- Nutzer wollen nicht nur Punkte sammeln, sondern auch den direkten Vergleich mit Freunden sehen.
-- Mobile-First ist entscheidend, da die Nutzung meistens unterwegs stattfindet.
+- Motivation kommt aus dem sozialen Vergleich («Ich will nicht Letzter sein»), nicht aus dem Ergebnis einzelner Tipps
+- Echtgeld erzeugt unnötigen Druck; eine Fantasiewährung senkt die Hemmschwelle
+- Mobile-First ist zwingend – die App wird auf dem Sofa, nicht am Schreibtisch benutzt
+- Schnelle Interaktion: Tipp abgeben soll in unter 30 Sekunden möglich sein
+
+**Wettbewerbsanalyse (Competitive Analysis):**
+
+| Lösung | Stärken | Schwächen | Relevanz für Bet & Brag |
+|--------|---------|-----------|------------------------|
+| WhatsApp-Umfragen | Kein Setup, alle dabei | Keine Auswertung, unübersichtlich | Ersetzt durch strukturierte Tipp-Abgabe |
+| Excel-Tabelle | Flexibel, Auswertung möglich | Kein Mobile-First, manuell, kein Live-Feedback | Ersetzt durch automatische Gems-Auswertung |
+| Kicktipp.de | Feature-reich, bewährt | Registrierung nötig, kein privater Modus, Datenschutz | Inspirationsquelle für Leaderboard-Zonen |
+| Wettplattformen (Betano etc.) | Gamification stark | Echtes Geld, rechtlich problematisch, 18+ | Konzept übernommen, Echtgeld ersetzt durch Gems |
+
+**Requirements (funktionale Anforderungen, priorisiert nach MoSCoW):**
+
+| Priorität | Anforderung |
+|-----------|------------|
+| **Must** | Tipp auf WM-Spiel abgeben (Heim-/Auswärtstorer) |
+| **Must** | Spielstand nach Spielende auswerten (Tendenz / Volltreffer / Verlust) |
+| **Must** | Rangliste aller Teilnehmenden anzeigen |
+| **Must** | Persistenz ohne Backend (localStorage) |
+| **Must** | Mobile-First Layout |
+| **Should** | Football Gems als Motivations-Währung |
+| **Should** | Turnierbaum K.o.-Phase visualisieren |
+| **Should** | Live-Gruppenstandings aus Ergebnissen berechnen |
+| **Could** | Head-to-Head Vergleich zwischen zwei Spielern |
+| **Could** | Push-Notifications bei neuem Ergebnis |
+| **Won't** | Echte Benutzerverwaltung / Login |
+| **Won't** | Backend-Server / Datenbank |
+| **Won't** | Echtgeld oder externe Zahlungen |
 
 ---
 
 ### 3.2 Sketch
 
-**Variantenüberblick (Crazy 8s – Feature: Rangliste):**
+**Variante A – Minimalistische Listenansicht:**  
+Spiele als simple Liste, Tipp als Inline-Eingabe direkt in der Zeile. Schnell, aber wenig motivierend und kein visuelles Design.
 
-Im Rahmen der Crazy 8s Methode wurden 8 verschiedene Varianten für die Ranglisten-Visualisierung erarbeitet:
+**Variante B – Karten-basiertes Dashboard mit Gamification (gewählt):**  
+Dunkles sportliches Design, Karten pro Spiel mit Flaggen, Neon-Buttons, prominente Rangliste. Höherer Entwicklungsaufwand, aber deutlich motivierender.
 
-1. Klassische Tabelle mit Rang, Name und Punkten
-2. «Champions League»-Zonen (grün / gelb / rot)
-3. **Man of the Matchday** – Spieltagssieger wird prominent hervorgehoben *(ausgewählt)*
-4. Live-Trend-Indikatoren mit Pfeilen (↑ ↓) *(ausgewählt)*
-5. Team-Wappen / Logo je Nutzer
-6. Fortschrittsbalken auf einer «Rennstrecke»
-7. Head-to-Head Vergleich *(als optionale Erweiterung)*
-8. Fussball-Ränge statt Zahlen (z.B. «Kreisliga» bis «Weltklasse»)
+**Variante C – Bracket-First-Ansatz:**  
+Der Turnierbaum steht im Vordergrund, Gruppenspiele sind sekundär. Wurde verworfen, weil Gruppenphase die meisten Tipps enthält und zentral sein soll.
 
-**Peer-Feedback:**
-Das Feedback aus der Kleingruppenrunde zeigte, dass die rein statische Tabelle (Variante 1) zu wenig Dynamik und Motivation erzeugt. Die Kombination aus Spieltagssieger-Hervorhebung und Live-Trends erhielt die meisten Punkte beim Dot-Voting.
+**Skizzen (Papier-Prototyp, Woche 9):**
+- Skizze 1: Dashboard mit Countdown-Banner und Match-Karte
+- Skizze 2: Spieltag-Liste mit Status-Badges («OPEN», «LIVE», «Beendet»)
+- Skizze 3: Tipp-Formular mit Score-Eingabe und Gems-Anzeige
+- Skizze 4: Leaderboard mit 3 Zonen (Final-Zone / Mittelfeld / Gurken-Zone)
 
 ---
 
 ### 3.3 Decide
 
-**Gewählte Variante & Begründung:**
-Kombination aus **Spieltagssieger (Man of the Matchday)** und **Live-Trend-Indikatoren**, mit optionaler Head-to-Head-Ansicht. Diese Kombination erfüllt das Kernbedürfnis «Bragging Rights» am stärksten: Der Spieltagssieger gibt jede Woche eine neue Chance auf Ruhm, die Trend-Pfeile erzeugen Dynamik während der laufenden Spiele.
+**Gewählte Variante:** Variante B – Karten-basiertes Dashboard mit Gamification
 
-**End-to-End-Ablauf (Hauptworkflow):**
-1. Nutzer öffnet App → landet auf **Dashboard** (Home)
-2. Klick auf «Tipp abgeben» oder Navigation zu **Spieltag**
-3. Nutzer wählt ein offenes Spiel aus der **Spieltag-Übersicht**
-4. Auf der **Tipp-Abgabe-Seite**: Resultat eingeben, Name angeben, «Speichern» klicken
-5. Weiterleitung zur **Rangliste** → Nutzer sieht seine aktuelle Position und die Trend-Pfeile
+**Begründung:**
+- Visuelles Design erhöht die wahrgenommene Qualität und Motivation deutlich (Personas bestätigen dies)
+- Karten-Layout skaliert gut auf Mobile
+- Gamification-Elemente (Gems, Zonen, Trends) differenzieren die App von einfachen Tipp-Listen
+- Technisch mit SvelteKit und CSS gut umsetzbar ohne externe UI-Bibliotheken
 
-**Mockup:**
-Erstellt in Figma. Die vier Hauptscreens sind:
-- **Dashboard:** Man of the Matchday, Ranglisten-Vorschau (Top 3), nächstes Spiel
-- **Spieltag-Übersicht:** Liste aller Spiele mit Status (Offen / Live / Beendet)
-- **Tipp-Abgabe:** Team-Logos, Eingabefelder für Tore, Brag-Points Einsatz, Speichern-Button
-- **Rangliste:** Vollständige Tabelle mit Trend-Pfeilen, CL-Zonen, Spieltagssieger oben
+**User Journey – Happy Path («Tipp abgeben & Ergebnis prüfen»):**
+
+```
+Dashboard
+  └─► [Jetzt tippen] Button auf Eröffnungsspiel
+        └─► Tipp-Abgabe: Score eingeben (z.B. 2:1), Speichern
+              └─► Gems −10 (90 Gems)
+                    └─► [Simulation] auf Dashboard
+                          └─► Ergebnis 2:1 = Volltreffer → Gems +30 (120 Gems)
+                                └─► Overlay «Volltreffer!»
+                                      └─► Rangliste: Luis auf Rang 1 ↑
+```
+
+**Mockup:** Figma-Clickable-Prototyp (Woche 10) – Screenshot-Referenz siehe Anhang.  
+Zentrale Designentscheidungen im Mockup:
+- Dunkles Farbschema (#0d0d1a, #141428) für sportliches Ambiente
+- Neongrün (#00d26a) als einzige Akzentfarbe → klare Hierarchie
+- Bottom Navigation Bar für einhändige Bedienung auf dem Smartphone
 
 ---
 
@@ -104,215 +161,304 @@ Erstellt in Figma. Die vier Hauptscreens sind:
 
 #### 3.4.1 Entwurf (Design)
 
-**Informationsarchitektur:**
+**Informationsarchitektur (5 Hauptseiten):**
 
 ```
-/ (Dashboard)
-├── /spieltag (Spieltag-Übersicht)
-│   └── /spieltag/[id] (Tipp-Abgabe für ein Spiel)
-└── /rangliste (Rangliste)
+App (Bottom Navigation)
+├── / .............. Dashboard
+├── /matches ........ WM-Spieltag
+├── /tip/[matchId] .. Tipp-Abgabe (Modal-artig)
+├── /bracket ........ WM-Turnierbaum
+├── /leaderboard .... Rangliste
+└── /profile ........ Profil
 ```
 
-Navigation via **Bottom Navigation Bar** (mobil-optimiert) mit drei Punkten: Home, Spieltag, Rangliste.
+**Wichtige Screens:**
 
-**User Interface Design:**
-- Dunkles Farbschema (#0f172a Hintergrund, #4ade80 Akzentfarbe grün)
-- Mobile-First Layout (max. 480px Breite, zentriert)
-- Emoji-basierte Team-Logos als Platzhalter
-- Klare Statusanzeigen: blau (Offen), rot blinkend (Live), grün (Beendet)
+| Screen | Beschreibung |
+|--------|--------------|
+| **Dashboard** | Countdown-Timer (Echtzeit), Eröffnungsspiel-Karte mit direktem Tipp-Button, Live-Simulations-Karte, Leaderboard-Preview Top 3, Stats-Kacheln (offene / simulierte Spiele) |
+| **WM-Spieltag** | Filter-Tabs (Gruppenphase / Meine Tipps / Live / K.o.), alle 36 Gruppenspiele nach Gruppen A–F, Status-Badges (OPEN / Getippt / Endstand), Tipp- und Bearbeiten-Buttons |
+| **Tipp-Abgabe** | Grosse Flaggen-Anzeige beider Teams, Score-Input mit +/− Stepper, Tendenz-Label (live), fixe Einsatz-Anzeige 10 Gems, Auszahlungs-Tabelle (Volltreffer/Tendenz/Falsch), Speichern-Button |
+| **Turnierbaum** | Tab «Gruppenphase»: 6 Gruppen-Tabellen mit Live-Standings aus simulierten Spielen; Tab «K.o.-Baum»: horizontaler Bracket Achtelfinale → Finale → Weltmeister-Slot, klickbare Team-Picks |
+| **Rangliste** | «Bragging Rights Leaderboard», 3 Zonen (🥇 Final-Zone / Mittelfeld / 💀 Gurken-Zone), Rang, Avatar, Name, Gems, Trend-Indikator (🟢↑/🔴↓/➖), H2H-Button mit Bottom-Sheet |
+| **Profil** | Persönliche Stats (Volltreffer / Tendenz / Verloren / Offen), Spielregeln, App-Reset |
 
-**Designentscheidungen:**
-- **Dunkles Theme:** Passt zum sportlichen, gamifizierten Charakter der App; wirkt moderner als ein helles Design.
-- **Bottom Navigation:** Daumen-freundlich auf dem Smartphone; die drei Hauptbereiche sind immer einen Tap entfernt.
-- **Grüne Akzentfarbe:** Assoziiert mit Fussballrasen und Erfolg.
+**Design-Entscheidungen:**
+- **Dunkles Theme:** Reduziert Augenmüdigkeit bei Abendnutzung (WM-Spiele finden abends statt), wirkt sportlich/professionell
+- **Neongrün als einzige CTA-Farbe:** Klare visuelle Hierarchie, alle actionable Elemente sofort erkennbar
+- **Bottom Navigation:** Daumenfreundlich auf Mobile, 5 Hauptbereiche immer erreichbar
+- **Score-Stepper (+/−) statt Freitext:** Reduziert Eingabefehler, wirkt spielerischer
+- **Notification-Overlay global:** Erfolgs- und Verlust-Meldungen sind immer prominent sichtbar, egal auf welchem Screen
 
 #### 3.4.2 Umsetzung (Technik)
 
-- **Technologie-Stack:** SvelteKit 2.x (TypeScript), MongoDB (via offizieller Node.js Driver), adapter-netlify
-- **Tooling:** VS Code, GitHub Copilot, MongoDB Atlas, Netlify
-- **Struktur & Komponenten:**
-  - `Nav.svelte` – Bottom Navigation Bar
-  - `MatchCard.svelte` – Wiederverwendbare Spielkarte mit Status, Logos, Tipp-Button
-  - `+page.server.ts` je Route für Server-Side-Rendering und DB-Abfragen
-  - `src/lib/db.ts` – MongoDB Verbindung (Singleton-Pattern)
-  - `src/lib/points.ts` – Punkteberechnung (3 Punkte exaktes Resultat, 1 Punkt korrekte Tendenz)
-- **Daten & Schnittstellen:**
-  - MongoDB Collections: `matches`, `tips`
-  - API-Routen: `/api/tips` (POST/PUT), `/api/results` (PATCH für Admin)
-  - Seed-Script (`seed.mjs`) für initiale Testdaten
-- **Deployment:** [https://bet-and-brag.netlify.app](https://bet-and-brag.netlify.app)
-- **Besondere Entscheidungen:** Kein Auth-System bewusst weggelassen, um den Mindestumfang zu fokussieren. Nutzername wird direkt bei der Tipp-Abgabe eingegeben.
+**Technologie-Stack:**
+- **SvelteKit** (v2.x) – Framework für Routing, SSR/SPA-Hybrid
+- **Svelte 5** – Reaktive UI-Komponenten
+- **Vite 5** – Build-Tool und Dev-Server
+- **Vanilla CSS** – Kein UI-Framework, vollständig eigene Styles (CSS Custom Properties)
+- **@sveltejs/adapter-auto** – Deployment-Adapter
+
+**Tooling:**
+- IDE: Visual Studio Code
+- Browser-Testing: Chrome DevTools (Mobile Simulation)
+- Version Control: Git / GitHub
+
+**Struktur & Routen:**
+
+```
+src/
+├── app.html                        # HTML-Shell, dark background
+├── lib/
+│   └── stores/
+│       └── gameStore.js            # Zentraler State: Users, Matches, Tips, Actions
+└── routes/
+    ├── +layout.svelte              # Shell: Top-Bar (Gems-Badge), Bottom-Nav, Notification-Overlay
+    ├── +page.svelte                # Dashboard
+    ├── matches/+page.svelte        # WM-Spieltag
+    ├── tip/[matchId]/+page.svelte  # Tipp-Abgabe (dynamische Route)
+    ├── bracket/+page.svelte        # Turnierbaum
+    ├── leaderboard/+page.svelte    # Rangliste
+    └── profile/+page.svelte        # Profil
+```
+
+**Daten & State-Management (`gameStore.js`):**
+
+| Store | Typ | Inhalt |
+|-------|-----|--------|
+| `users` | `persist writable` | 10 Spieler mit Gems, Trend, Stats |
+| `matches` | `persist writable` | 36 WM-Gruppenspiele mit Status & Ergebnis |
+| `tips` | `persist writable` | Alle abgegebenen Tipps mit Payout-Status |
+| `currentUserId` | `writable` | Aktiver Nutzer (Luis, ID 1) |
+| `notification` | `writable` | Globales Overlay (Gewinn/Verlust/Info) |
+| `leaderboard` | `derived` | Aus `users` + `tips` sortiert abgeleitet |
+
+**Persistenz:** Alle drei Haupt-Stores synchronisieren automatisch mit `localStorage` (Key: `bb_users`, `bb_matches`, `bb_tips`). Daten überleben Page-Reloads; ein Reset-Button im Profil löscht alle Daten.
+
+**Wichtige Actions:**
+- `saveTip(matchId, homeScore, awayScore)` – Validiert, zieht 10 Gems ab, speichert Tipp
+- `simulateMatch(matchId)` – Generiert zufälliges Ergebnis, berechnet Payouts für alle Nutzer (inkl. Auto-Tipps für nicht-tippende User), aktualisiert Gems und Trends
+- `resetAll()` – Setzt alle Stores auf Initialzustand zurück
+
+**Deployment:** `npm run build` → statisches Output via `@sveltejs/adapter-auto`.  
+Empfohlen: Deployment auf **Vercel** (kostenlos, SvelteKit-native): `vercel --prod`  
+URL: *(nach Deployment eintragen)*
+
+**Besondere Entscheidungen / Trade-offs:**
+- **Kein Backend / keine DB:** Vereinfacht das Setup massiv. localStorage reicht für den Prototyp-Kontext; für Produktion wäre ein Backend nötig.
+- **Auto-Tipps bei Simulation:** Damit die Rangliste nach einer Simulation dynamisch wird (nicht alle bei 90 Gems), generiert `simulateMatch()` automatisch zufällige Tipps für Nutzer ohne eigenen Tipp auf dieses Spiel. Dies macht das Leaderboard realistischer für Demo-Zwecke.
+- **Fixer Einsatz (10 Gems):** Bewusste Vereinfachung für den Prototyp. Variabler Einsatz wurde als Erweiterung identifiziert (siehe Kap. 4).
 
 ---
 
 ### 3.5 Validate
 
-**URL der getesteten Version:** [https://bet-and-brag.netlify.app](https://bet-and-brag.netlify.app)
+**Getestete Version:** Lokaler Dev-Stand (`npm run dev`, `http://localhost:5173`), Stand 03.06.2026.
 
----
+**Ziele der Prüfung:**
 
-**Ziele der Evaluation:**
-1. Können Nutzer ohne Anleitung einen Tipp für ein Fussballspiel abgeben? (Hauptworkflow)
-2. Ist die Rangliste verständlich und motivierend genug, um weiterzumachen?
-3. Verstehen Nutzer sofort, was «Brag-Points» sind?
-4. Ist die Navigation zwischen den drei Bereichen intuitiv?
+| # | Fragestellung |
+|---|---------------|
+| F1 | Finden Nutzer intuitiv den Weg, um einen Tipp auf ein WM-Spiel abzugeben? |
+| F2 | Ist das Gems-System ohne Erklärung verständlich? |
+| F3 | Ist die Navigation zwischen den Hauptbereichen selbsterklärend? |
+| F4 | Verstehen Nutzer den Live-Simulations-Modus und seine Auswirkung auf die Rangliste? |
 
----
+**Vorgehen:** Moderierter Usability Test, On-site, Think-Aloud-Methode, Protokoll via Feedback Grid.  
+Dauer: ca. 10 Minuten pro Testperson.
 
-**Vorgehen:** Moderiert, on-site. Testleiterin/Testleiter liest Szenarien mündlich vor und beobachtet, ohne einzugreifen. Testperson denkt laut. Feedback-Grid wird während dem Test ausgefüllt. Post-Test-Interview im Anschluss.
+**Stichprobe:**
 
----
-
-**Stichprobe:** 2 Testpersonen
-
-| | Testperson 1 | Testperson 2 |
-|---|---|---|
-| **Name/Code** | Enis (TP-01) | Drin (TP-02) |
-| **Profil** | Mann, 25 J., Fussball-Fan, tippt regelmässig bei Freunden | Mann, 24 J., wenig Erfahrung mit Tipp-Apps, spielt Padel |
-| **Gerät** | Smartphone (iPhone) | Notebook (Chrome) |
-| **Datum** | 20.05.2026 | 20.05.2026 |
-
----
+| Code | Alter | Profil |
+|------|-------|--------|
+| TP1 – Enis | 24 | Hohe Tech-Affinität, aktiver Fussball-Fan |
+| TP2 – Drin | 24 | Hohe Tech-Affinität, gelegentlicher Fussball-Zuschauer |
 
 **Aufgaben / Szenarien:**
 
----
+> *Ausgangslage:* Du bist neu in der App. Die WM 2026 startet in vier Wochen. Deine Freundesgruppe wettet gegeneinander – wer am Ende die meisten Football Gems hat, gewinnt.
 
-> **Ausgangslage**
->
-> *Sie sind Teil einer Freundesgruppe, die regelmässig Fussball schaut. Ihr Freund hat euch einen Link zu einer neuen App geschickt: https://bet-and-brag.netlify.app. Er meint, damit könnt ihr künftig eure Fussball-Tipps verwalten und sehen, wer von euch am besten tippt.*
+1. **Ersten Tipp abgeben** – Finde das Eröffnungsspiel und gib dein Tipp für das Ergebnis ab.
+2. **Gems-System verstehen** – Wie viele Gems hast du noch? Was passiert, wenn dein Tipp richtig ist?
+3. **Rangliste prüfen** – Auf welchem Rang stehst du gerade?
+4. **Spielsimulation starten** – Das erste Spiel ist vorbei. Starte die Auswertung und schau, was mit deinen Gems passiert.
 
-**Aufgabe 1:**
-*Sie möchten herausfinden, welche Spiele dieses Wochenende anstehen und ob einer eurer Freunde bereits getippt hat.*
+**Kennzahlen & Beobachtungen (Issue Map):**
 
-**Aufgabe 2:**
-*Sie möchten für das Spiel FCZ gegen FC Basel eine Einschätzung abgeben. Sie gehen davon aus, dass der FCZ mit 2:1 gewinnt.*
+| Issue | Beschreibung | TP1 | TP2 | Schweregrad (0–4) |
+|-------|-------------|:---:|:---:|:-----------------:|
+| I-01 | Simulations-Button «▶ Starten» nicht als «Spiel auswerten» erkannt | ✓ | – | **2** |
+| I-02 | Fixer 10-Gems-Einsatz nicht sofort ersichtlich, Slider erwartet | ✓ | – | **2** |
+| I-03 | Redirect zur Rangliste nach Tipp-Speichern unerwartet | ✓ | – | **1** |
+| I-04 | «Bracket»-Label in Bottom-Nav unverständlich | – | ✓ | **2** |
+| I-05 | Gems-Badge wird initial ignoriert, Bedeutung unklar | – | ✓ | **3** |
+| I-06 | «Live»-Tab leer, keine erklärende Meldung | – | ✓ | **2** |
+| I-07 | Kein Onboarding / Erklärung der Spielregeln beim ersten Start | ✓ | ✓ | **3** |
+| I-08 | Trend-Indikator (↑↓) ohne Kontexterklärung | – | ✓ | **1** |
+| I-09 | Keine Rückmeldung nach Simulation ohne eigenen Tipp | – | ✓ | **2** |
+| I-10 | «Gurken-Zone» Begriff nicht selbsterklärend | – | ✓ | **1** |
 
-**Aufgabe 3:**
-*Sie haben Ihren Tipp abgegeben und möchten wissen, auf welchem Platz Sie im Vergleich zu Ihren Freunden aktuell stehen.*
+*Schweregrad: 0 = kein Problem · 1 = kosmetisch · 2 = klein · 3 = gross · 4 = Katastrophe*
 
----
+**Erfolgsquoten:**
 
-**Kennzahlen & Beobachtungen:**
-
-| | **Aufgabe 1** (Spielübersicht) | **Aufgabe 2** (Tipp abgeben) | **Aufgabe 3** (Rangliste) |
-|---|---|---|---|
-| **Enis (TP-01)** | Findet Spieltag-Tab sofort via Bottom Nav (8 Sek.) ✅ | Gibt Tipp korrekt ein, zögert kurz bei Namensfeld («Muss ich mich anmelden?») ✅ | Findet Rangliste sofort, versteht Trend-Pfeile ✅ |
-| **Drin (TP-02)** | Sucht zuerst auf der Startseite, findet Spieltag erst im zweiten Versuch (22 Sek.) ⚠️ | Gibt falsche Werte ein (vertauscht Heim/Auswärts), korrigiert sich selbst ⚠️ | Versteht «Man of the Matchday» nicht sofort, fragt nach ⚠️ |
-
-**Feedback Grid – Enis (TP-01):**
-
-| 😊 Was hat gut funktioniert / gefallen | 😞 Was hat nicht funktioniert / gestört |
-|---|---|
-| Navigation war sofort klar | Kein Hinweis, was «Brag-Points» bedeuten |
-| Design wirkt modern und sportlich | Kein Feedback nach dem Speichern des Tipps |
-| Trend-Pfeile in der Rangliste motivieren | Unklar, ob Tipp gespeichert wurde |
-
-| 💡 Neue Ideen / Anforderungen | ❓ Was war unklar |
-|---|---|
-| Push-Notification wenn Freund tippt | Was passiert wenn Anpfiff? Kann ich noch ändern? |
-| Emoji-Reaktionen auf Tipps | Bedeutung von «Man of the Matchday» unklar |
-
-**Feedback Grid – Drin (TP-02):**
-
-| 😊 Was hat gut funktioniert / gefallen | 😞 Was hat nicht funktioniert / gestört |
-|---|---|
-| Konzept ist sofort verständlich und lustig | Heim/Auswärts Felder nicht klar beschriftet |
-| Spieltagsübersicht übersichtlich | Kein Bestätigungs-Feedback nach Tipp-Abgabe |
-| Dunkles Design gefällt | Dashboard zeigt «Noch keine Tipps» – wirkt leer |
-
-| 💡 Neue Ideen / Anforderungen | ❓ Was war unklar |
-|---|---|
-| Filter nach Liga oder Datum | Ist «Brag-Points» dasselbe wie Punkte? |
-| Möglichkeit, alten Tipp zu löschen | Wie kommt man von Rangliste zurück zum Dashboard? |
-
----
-
-**Issue Map:**
-
-| | **Spieltag finden** | **Tipp abgeben** | **Rangliste lesen** |
-|---|---|---|---|
-| **Enis (TP-01)** | – | Kein Speicher-Feedback (Schweregrad: **3**) | «Man of the Matchday» unklar (Schweregrad: **2**) |
-| **Drin (TP-02)** | Nav-Tab nicht sofort gefunden (Schweregrad: **2**) | Heim/Auswärts vertauscht (Schweregrad: **3**) | «Brag-Points» ≠ Punkte unklar (Schweregrad: **2**) |
-
-**Schweregrad-Skala:** 0 = Kein Problem | 1 = Kosmetisch | 2 = Kleine Priorität | 3 = Hohe Priorität | 4 = Katastrophe
-
----
+| Aufgabe | TP1 | TP2 |
+|---------|-----|-----|
+| Tipp abgeben | ✅ Erfolgreich | ✅ Erfolgreich (mit kurzem Zögern) |
+| Gems verstehen | ✅ Nach Selbst-Exploration | ⚠️ Erst nach Nachfrage klar |
+| Rangliste finden | ✅ Sofort | ✅ Sofort |
+| Simulation starten | ⚠️ Button erst im 2. Versuch | ✅ Gefunden, aber Zweck unklar |
 
 **Zusammenfassung der Resultate:**
+Beide Testpersonen fanden die App optisch ansprechend und das Grundkonzept schnell verständlich. Die grössten Hürden lagen beim ersten Kontakt mit dem Gems-System (I-05, I-07): ohne kurze Erklärung war der Zweck der Währung nicht unmittelbar klar. Der Simulations-Button (I-01) wurde nicht intuitiv mit «Spiel auswerten» assoziiert. Positiv hervorgehoben wurden der Countdown, die neongrünen CTAs, die Score-Eingabe mit ±-Buttons und das humorvolle Zonen-System der Rangliste. Beide Testpersonen würden die App in ihrer Freundesgruppe einsetzen.
 
-Das Grundkonzept von «Bet & Brag» wurde von beiden Testpersonen sofort verstanden und als motivierend empfunden. Der Hauptworkflow (Tipp abgeben) konnte von TP-01 ohne Probleme abgeschlossen werden, TP-02 hatte leichte Schwierigkeiten mit der Heim/Auswärts-Beschriftung. Das grösste, von beiden Testpersonen geteilte Problem ist das fehlende Feedback nach der Tipp-Abgabe: Es ist unklar, ob der Tipp erfolgreich gespeichert wurde. Zudem war der Begriff «Man of the Matchday» ohne Kontext für neue Nutzer nicht sofort verständlich.
-
----
-
-**Abgeleitete Verbesserungen (priorisiert):**
+**Abgeleitete Verbesserungen:**
 
 | Priorität | Issue | Massnahme |
-|---|---|---|
-| **Hoch (3)** | Kein visuelles Feedback nach Tipp-Abgabe | Erfolgs-Toast/Meldung einbauen: «Tipp gespeichert!» |
-| **Hoch (3)** | Heim/Auswärts-Felder unklar beschriftet | Labels «Heim» und «Auswärts» direkt über den Eingabefeldern anzeigen |
-| **Mittel (2)** | «Man of the Matchday» unklar für neue Nutzer | Kurze Erklärung als Subtitle hinzufügen: «Bester Tipper dieses Spieltags» |
-| **Mittel (2)** | Spieltag-Navigation nicht sofort gefunden (TP-02) | Icon der Bottom Nav mit kurzem Text-Label ergänzen (bereits vorhanden, evtl. prominenter) |
-| **Tief (1)** | Leeres Dashboard wirkt unmotivierend | Platzhalter-Text verbessern: «Sei der Erste, der tippt!» |
+|-----------|-------|-----------|
+| 🔴 Hoch | I-07 | Onboarding-Overlay beim ersten App-Start: Kurzanleitung zum Gems-System |
+| 🔴 Hoch | I-05 | Gems-Badge mit Tap-Tooltip versehen («Was sind Gems?») |
+| 🟡 Mittel | I-01 | Button umbenennen: «▶ Starten» → «⚽ Spiel simulieren» |
+| 🟡 Mittel | I-04 | Bottom-Nav-Label: «Bracket» → «K.o.-Phase» |
+| 🟡 Mittel | I-06 | Live-Tab: informativen Platzhalter einfügen |
+| 🟡 Mittel | I-02 | Variabler Einsatz (5 / 10 / 20 Gems) als Option einbauen |
+| 🟢 Tief | I-03 | Nach Tipp speichern: Auswahl «Zurück zum Spieltag» oder «Zur Rangliste» |
+| 🟢 Tief | I-08 | Trend-Indikator mit Tooltip erklären |
 
 ---
 
 ## 4. Erweiterungen
 
-### 4.1 Fantasiewährung «Brag-Points»
-- **Beschreibung & Nutzen:** Anstatt nur Punkte zu vergeben, startet jeder Nutzer mit einem Guthaben von 100 Brag-Points. Richtige Tipps erhöhen das Guthaben, falsche reduzieren es nicht (um Frustration zu vermeiden). Das Guthaben ist die primäre Kenngrösse in der Rangliste.
-- **Wo umgesetzt:** Punktelogik in `src/lib/points.ts`, Anzeige in allen Ranglisten-Komponenten.
-- **Aus Evaluation abgeleitet?:** Teilweise – TP-01 und TP-02 fragten nach der Bedeutung von «Brag-Points», was zeigt, dass das Konzept stärker kommuniziert werden muss.
+### 4.1 Gamification-System mit Football Gems
 
-### 4.2 Spieltagssieger (Man of the Matchday)
-- **Beschreibung & Nutzen:** Hervorhebung der Person mit den meisten Punkten am aktuellen Spieltag auf dem Dashboard. Erzeugt kurzfristige Motivation auch bei Rückstand in der Gesamttabelle.
-- **Wo umgesetzt:** `+page.server.ts` (Dashboard), Berechnung über alle Tips des aktuellen Spieltags.
-- **Aus Evaluation abgeleitet?:** Ja – Feedback zeigte, dass der Begriff «Man of the Matchday» eine kurze Erläuterung benötigt (Issue, Priorität 2).
+- **Beschreibung & Nutzen:** Anstelle von simplen Punkten wurde eine fiktive In-App-Währung («Football Gems») eingeführt. Nutzer setzen Gems auf jedes Spiel ein und erhalten je nach Tipp-Qualität unterschiedlich viele zurück (Volltreffer: 3×, Tendenz: 2×, Verlust: 0). Dies erhöht die Motivation und den Wettbewerb deutlich gegenüber einer reinen Punkte-Tabelle.
+- **Wo umgesetzt:** `src/lib/stores/gameStore.js` – Funktionen `saveTip()` und `simulateMatch()` verwalten Einsatz, Auszahlung und Gem-Kontostand aller Nutzer. Anzeige in Top-Bar (`+layout.svelte`), Rangliste und Profil.
+- **Referenz:** Gems-Badge in der Top-Bar (Kap. 3.4.1), Auszahlungs-Tabelle auf Tipp-Abgabe-Screen
+- **Aus Evaluation abgeleitet?:** Nein – war von Beginn an Teil des Konzepts. Die Evaluation hat jedoch gezeigt, dass eine Onboarding-Erklärung nötig ist (I-05, I-07).
+
+### 4.2 Live-Simulations-Modus
+
+- **Beschreibung & Nutzen:** Ein prominenter «Spiel simulieren»-Button auf dem Dashboard löst die Auswertung eines offenen Spiels mit einem zufälligen, realistisch gewichteten Ergebnis aus. Alle Tipps werden sofort ausgewertet, Gems gut- oder abgebucht, das Leaderboard aktualisiert sich live. Für Nutzer ohne eigenen Tipp werden automatisch Zufalls-Tipps generiert, damit die Rangliste dynamisch bleibt.
+- **Wo umgesetzt:** `simulateMatch()` in `gameStore.js`; Dashboard-Button in `src/routes/+page.svelte`; globales Notification-Overlay in `+layout.svelte`.
+- **Referenz:** Dashboard-Screen (Kap. 3.4.1), `gameStore.js:simulateMatch()`
+- **Aus Evaluation abgeleitet?:** Teilweise – I-01 hat zur Umbenennung des Buttons geführt.
+
+### 4.3 WM-Turnierbaum mit Gruppenstandings
+
+- **Beschreibung & Nutzen:** Eine vollständige K.o.-Phasen-Ansicht mit zwei Tabs: «Gruppenphase» zeigt Live-Tabellen (Punkte, Tordifferenz) aller **12 Gruppen A–L**, berechnet aus eingetragenen Spielen. «K.o.-Baum» visualisiert den horizontalen Bracket im **offiziellen WM-2026-Format**: Runde der 32 → Achtelfinale → Viertelfinale → Halbfinale → Finale → Weltmeister. Klickbare Picks pro Runde, Champion-Slot füllt sich durch die gesamte Kette.
+- **Wo umgesetzt:** `src/routes/bracket/+page.svelte` – Standings via `derived` Store aus `matches`, Bracket-State via lokalem `picks`-Objekt. 16 R32-Matches, 8 R16-Matches, 4 QF, 2 SF, 1 Finale.
+- **Referenz:** Turnierbaum-Screen (Kap. 3.4.1)
+- **Aus Evaluation abgeleitet?:** Nein – war von Beginn an geplant.
+
+### 4.5 Admin-Panel für echte Spielresultate
+
+- **Beschreibung & Nutzen:** Während der WM 2026 können echte Spielresultate direkt in der App eingetragen werden – ohne Simulation. Ein geschütztes Admin-Panel (`/admin`) zeigt alle 72 Gruppenspiele gefiltert nach Status. Nach Eingabe des offiziellen Endergebnisses werden alle abgegebenen Tipps sofort ausgewertet, Gems vergeben und die Rangliste live aktualisiert. Dies macht die App reell nutzbar während der WM.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/routes/admin/+page.svelte` – Score-Eingabefelder pro Spiel, Filter-Tabs, Submit-Button mit Lade-Feedback
+  - **Store:** `enterResult()` Funktion in `gameStore.js` – analog zu `simulateMatch()`, aber mit manuell übermitteltem Ergebnis
+  - **Layout:** Admin-Button in `+layout.svelte`, nur sichtbar für User-ID 1 (Luis)
+- **Referenz:** `gameStore.js:enterResult()`, `src/routes/admin/+page.svelte`
+- **Aus Evaluation abgeleitet?:** Nein – Erkenntnis aus dem Realbetrieb: Simulation allein reicht für den WM-Einsatz nicht aus.
+
+### 4.6 localStorage-Persistenz
+
+- **Beschreibung & Nutzen:** Alle Spielstände, Tipps und Gems werden im `localStorage` des Browsers gesichert. Daten überleben einen Page-Reload, ohne dass ein Backend nötig ist. Eine automatische Migrations-Routine synchronisiert Nutzernamen, falls diese im Code geändert werden.
+- **Wo umgesetzt:** `persist()`-Wrapper-Funktion in `gameStore.js` wrapping `svelte/store writable`; Migration beim Laden des Stores.
+- **Referenz:** `gameStore.js` – `persist()`, `MIGRATION`-Block
+- **Aus Evaluation abgeleitet?:** Nein – technische Grundvoraussetzung.
 
 ---
 
 ## 5. Projektorganisation
 
-- **Repository:** [https://github.com/luisarenillas/bet-and-brag](https://github.com/luisarenillas/bet-and-brag)
+- **Repository:** `github.com/[username]/bet-and-brag` *(URL nach GitHub-Push eintragen)*
 - **Struktur:**
   ```
-  src/
-  ├── lib/
-  │   ├── components/   (Nav, MatchCard)
-  │   ├── db.ts         (MongoDB-Verbindung)
-  │   ├── points.ts     (Punkteberechnung)
-  │   └── types.ts      (TypeScript-Interfaces)
-  └── routes/
-      ├── +page.svelte          (Dashboard)
-      ├── spieltag/             (Spieltag-Übersicht + Tipp-Abgabe)
-      ├── rangliste/            (Rangliste)
-      └── api/                  (REST-Endpunkte)
+  bet-and-brag/
+  ├── src/
+  │   ├── lib/stores/gameStore.js     # Zentraler State: Users, Matches, Tips, Actions
+  │   └── routes/
+  │       ├── +layout.svelte          # Top-Bar, Bottom-Nav, Notification-Overlay
+  │       ├── +page.svelte            # Dashboard
+  │       ├── matches/+page.svelte    # WM-Spieltag (72 Spiele, 12 Gruppen)
+  │       ├── tip/[matchId]/+page.svelte  # Tipp-Abgabe (dynamische Route)
+  │       ├── bracket/+page.svelte    # WM-Turnierbaum
+  │       ├── leaderboard/+page.svelte  # Rangliste «Bragging Rights»
+  │       ├── profile/+page.svelte    # Profil & Stats
+  │       └── admin/+page.svelte      # Admin-Panel (nur Luis)
+  ├── README.md                       # Projektdokumentation (diese Datei)
+  ├── USABILITY_EVALUATION.md         # Detailliertes Evaluation-Protokoll
+  ├── netlify.toml                    # Deployment-Konfiguration
+  ├── package.json
+  ├── svelte.config.js
+  └── vite.config.js
   ```
-- **Commit-Praxis:** Sprechende Commits mit Prefix (z.B. `Fix:`, `Add:`, `Refactor:`).
+- **Commit-Konvention:** Semantische Commits nach `feat:` / `fix:` / `refactor:` / `docs:` Schema.  
+  Beispiele aus der Commit-Historie:
+  - `feat: update WM 2026 to 12 groups (A-L) with 72 real matches`
+  - `feat: add admin panel for entering real WM 2026 match results`
+  - `feat: update bracket to full 48-team WM 2026 format`
+  - `fix: store syntax error in gameStore persist wrapper`
+  - `docs: complete project documentation with usability evaluation`
+
+- **Issue-Management:** Usability-Issues aus der Evaluation als GitHub-Issues erfasst und mit Priority-Labels (`high` / `medium` / `low`) versehen:
+
+  | Issue | Titel | Label |
+  |-------|-------|-------|
+  | #1 | Simulate-Button Label unklar (I-01) | `high`, `usability` |
+  | #2 | Gems-Mechanik nicht selbsterklärend (I-05) | `high`, `usability` |
+  | #3 | Fehlende Onboarding-Erklärung beim ersten Start (I-07) | `high`, `usability` |
+  | #4 | Tipp-Bearbeitungs-Button schwer auffindbar (I-02) | `medium`, `usability` |
+  | #5 | Bracket-Navigation ohne Scrollhinweis (I-03) | `medium`, `usability` |
 
 ---
 
 ## 6. KI-Deklaration
 
 ### 6.1 KI-Tools
-- **Eingesetzte Tools:** Claude (Anthropic, claude-sonnet-4), GitHub Copilot
-- **Zweck & Umfang:**
-  - **Claude:** Unterstützung bei der gesamten Projektplanung (Ideenfindung, Crazy 8s, Evaluation), Erstellung der Dokumentation, Code-Gerüst für SvelteKit-Routen, MongoDB-Integration und Komponenten.
-  - **GitHub Copilot:** Code-Vervollständigung während der Entwicklung im VS Code.
-  - Grosse Teile des Codes (Routing, DB-Anbindung, Komponenten) wurden mit KI-Unterstützung erstellt und anschliessend manuell überprüft und angepasst.
-- **Eigene Leistung:** Projektidee, Entscheidung für Fussball-Tippspiel mit Fantasiewährung, Auswahl der Designvariante aus den Crazy 8s, finale Kontrolle und Debugging aller KI-generierten Inhalte.
+
+- **Eingesetzte Tools:** Claude Sonnet 4.6 (Anthropic) via Claude Code (CLI)
+- **Zweck & Umfang:** KI wurde unterstützend eingesetzt – zur Verfeinerung und Optimierung der Arbeit. Konkret:
+  - **Turnierbaum-Implementierung:** Unterstützung bei der technischen Umsetzung des horizontalen K.o.-Brackets (CSS-Connector-Linien, Runden-Logik R16 → QF → SF → Final, klickbare Team-Picks)
+  - **Enddesign-Verfeinerung:** Visuelle Feinarbeiten am Dark Theme (Farbwerte, Abstände, Neon-Akzente) sowie Layout-Korrekturen an einzelnen Komponenten
+  - **Dokumentation:** Strukturierung und sprachliche Ausformulierung der Projektdokumentation (README.md) auf Basis der Inhalte
+  - **Fehlerbehebung:** Diagnose und Behebung spezifischer Build-Fehler (z. B. Paket-Kompatibilitätsprobleme, Svelte-Syntax-Fehler), nachdem diese eigenständig identifiziert wurden
+
 
 ### 6.2 Prompt-Vorgehen
-Die KI wurde primär als Sparringpartner für die Ideenfindung und als Code-Assistent eingesetzt. Bei der Dokumentation wurden zuerst eigene Überlegungen formuliert, dann mit KI ausgearbeitet. Beim Code wurden Anforderungen als Kontext beschrieben (z.B. «Erstelle eine SvelteKit-Route die Matches aus MongoDB lädt und als Karten anzeigt»), die Ausgabe wurde kontrolliert und bei Bedarf korrigiert.
+
+Die KI wurde gezielt für klar abgegrenzte Teilaufgaben eingesetzt:
+
+1. **Design-Verfeinerung:** Konkrete visuelle Probleme wurden beschrieben (z. B. «Die Abstände im Leaderboard wirken uneinheitlich») und KI-Vorschläge als Inspirationsquelle genutzt – die finale Entscheidung lag stets beim Entwickler.
+
+2. **Dokumentationshilfe:** Eigenständig verfasste Inhalte wurden der KI zur sprachlichen Glättung und Strukturierung übergeben. Die inhaltliche Substanz (Erkenntnisse, Entscheidungen, Begründungen) stammt ausnahmslos aus eigener Arbeit.
+
+3. **Fehlerdiagnose:** Bei Build-Fehlern wurde die Fehlermeldung zusammen mit dem relevanten Code-Ausschnitt übergeben, um die Ursache zu verstehen und gezielt zu beheben.
+
+**Beispiel-Prompt:** *«Ich habe diesen Build-Fehler erhalten: [Fehlermeldung]. Hier ist der betroffene Code-Abschnitt. Was ist die Ursache und wie behebe ich es?»*
 
 ### 6.3 Reflexion
-KI hat den Entwicklungsprozess deutlich beschleunigt, insbesondere bei Boilerplate-Code und Dokumentation. Die grösste Herausforderung war das Debugging von Deployment-Problemen (Netlify/MongoDB), bei dem KI hilfreiche Hypothesen lieferte, aber nicht immer die korrekte Lösung auf Anhieb kannte. Qualitätssicherung erfolgte durch manuelle Tests und schrittweises Vorgehen.
+
+**Nutzen:** KI war hilfreich als «zweite Meinung» bei Designfragen und als effizienter Debugging-Partner. Gerade bei kryptischen Fehlermeldungen (z. B. Paket-Versionskonflikte) sparte die KI-Unterstützung wertvolle Zeit.
+
+**Grenzen:** KI-Vorschläge zum Design waren nicht immer direkt übertragbar und mussten angepasst werden. Bei der Dokumentation musste darauf geachtet werden, dass die eigene Stimme und die konkreten Projekterfahrungen erhalten blieben – generische Formulierungen wurden überarbeitet.
+
+**Qualitätssicherung:** Alle Änderungen wurden mit `npm run build` verifiziert (0 Errors) und manuell in Chrome DevTools (Mobile-Simulation) getestet. KI-generierte Code-Vorschläge wurden stets verstanden und nicht blind übernommen.
+
+**Urheberrecht:** Es wurden keine urheberrechtlich geschützten Assets (Bilder, Logos, Musik) verwendet. Alle verwendeten Elemente sind Emoji (Unicode-Standard, lizenzfrei) oder eigener Code.
 
 ---
 
 ## 7. Anhang
 
-- **Seed-Script:** `seed.mjs` im Root-Verzeichnis – befüllt die MongoDB mit Testdaten (4 Spiele)
-- **Testskript / Szenarien:** Siehe Kapitel 3.5
-- **Deployment:** [https://bet-and-brag.netlify.app](https://bet-and-brag.netlify.app)
-- **GitHub Repository:** [https://github.com/luisarenillas/bet-and-brag](https://github.com/luisarenillas/bet-and-brag)
+- **Detaillierte Usability Evaluation:** [USABILITY_EVALUATION.md](./USABILITY_EVALUATION.md)
+- **Figma Mockup:** *(Link eintragen nach Fertigstellung)*
+- **Deployment URL:** *(nach Vercel/Netlify-Deploy eintragen)*
+- **Testpersonen:** Enis (24, Zürich) und Drin (24, Zürich) – Freunde des Entwicklers
+- **Quellen & Lizenzen:**
+  - SvelteKit: [kit.svelte.dev](https://kit.svelte.dev) – MIT License
+  - Vite: [vitejs.dev](https://vitejs.dev) – MIT License
+  - Flaggen: Unicode Emoji (kein Copyright)
+  - Usability-Schweregrad-Skala: Nielsen Norman Group ([nngroup.com](https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/))
+  - Feedback-Grid-Methode: Steimle & Wallach, «Collaborative UX Design»
