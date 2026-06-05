@@ -372,7 +372,7 @@ Beide Testpersonen fanden die App optisch ansprechend und das Grundkonzept schne
 
 ## 5. Projektorganisation
 
-- **Repository:** `github.com/[username]/bet-and-brag` *(URL nach GitHub-Push eintragen)*
+- **Repository:** [github.com/luisarenillas/bet-and-brag](https://github.com/luisarenillas/bet-and-brag)
 - **Struktur:**
   ```
   bet-and-brag/
