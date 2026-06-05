@@ -149,11 +149,20 @@ Dashboard
                                       └─► Rangliste: Luis auf Rang 1 ↑
 ```
 
-**Mockup:** Figma-Clickable-Prototyp (Woche 10) – Screenshot-Referenz siehe Anhang.  
+**Mockup – Frühe Screendesigns (Woche 10):**
+
+Die folgenden Mockups zeigen den Designentwurf der drei Hauptseiten vor der Implementierung. Sie dienten als Referenz für Layout, Farbgebung und Komponentenanordnung.
+
+| Dashboard | Spieltag | Rangliste |
+|:---------:|:--------:|:---------:|
+| ![Dashboard Mockup](static/mockups/mockup-dashboard.svg) | ![Spieltag Mockup](static/mockups/mockup-spieltag.svg) | ![Rangliste Mockup](static/mockups/mockup-leaderboard.svg) |
+
 Zentrale Designentscheidungen im Mockup:
-- Dunkles Farbschema (#0d0d1a, #141428) für sportliches Ambiente
-- Neongrün (#00d26a) als einzige Akzentfarbe → klare Hierarchie
+- Dunkles Farbschema (`#0d0d1a`, `#141428`) für sportliches Ambiente
+- Neongrün (`#00d26a`) als einzige Akzentfarbe → klare visuelle Hierarchie
 - Bottom Navigation Bar für einhändige Bedienung auf dem Smartphone
+- Karten-basiertes Layout mit abgerundeten Ecken für moderne Mobile-Optik
+- Status-Badges (OFFEN / GETIPPT / BEENDET) für sofortige Orientierung im Spieltag
 
 ---
 

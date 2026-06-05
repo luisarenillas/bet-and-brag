@@ -1,0 +1,103 @@
+<svg width="390" height="844" viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', system-ui, sans-serif">
+  <!-- Phone background -->
+  <rect width="390" height="844" fill="#0d0d1a" rx="0"/>
+
+  <!-- Status bar -->
+  <rect width="390" height="44" fill="#0d0d1a"/>
+  <text x="20" y="28" fill="#ffffff" font-size="13" font-weight="600">9:41</text>
+  <text x="340" y="28" fill="#ffffff" font-size="11">●●● WiFi 🔋</text>
+
+  <!-- Top bar -->
+  <rect y="44" width="390" height="52" fill="rgba(13,13,26,0.95)"/>
+  <rect y="96" width="390" height="1" fill="rgba(255,255,255,0.06)"/>
+  <text x="20" y="76" fill="#00d26a" font-size="18" font-weight="800">⚽ Bet &amp; Brag</text>
+  <!-- Gems badge -->
+  <rect x="270" y="56" width="100" height="28" rx="14" fill="rgba(0,210,106,0.12)" stroke="rgba(0,210,106,0.3)" stroke-width="1"/>
+  <text x="283" y="75" fill="#00d26a" font-size="13" font-weight="700">💎 100 Gems</text>
+
+  <!-- COUNTDOWN CARD -->
+  <rect x="16" y="110" width="358" height="88" rx="16" fill="linear-gradient(135deg,#141428,#1a1030)"/>
+  <rect x="16" y="110" width="358" height="88" rx="16" fill="#141428" stroke="rgba(0,210,106,0.2)" stroke-width="1"/>
+  <text x="32" y="137" fill="#8888aa" font-size="11" font-weight="700" letter-spacing="2">WM 2026 STARTET IN</text>
+  <text x="32" y="168" fill="#ffffff" font-size="32" font-weight="900">06 T  12 H  34 M</text>
+  <text x="32" y="186" fill="#555577" font-size="11">11. Juni 2026 · Eröffnungsspiel</text>
+
+  <!-- ERÖFFNUNGSSPIEL CARD -->
+  <rect x="16" y="212" width="358" height="110" rx="16" fill="#141428" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <text x="32" y="236" fill="#8888aa" font-size="10" font-weight="700" letter-spacing="2">ERÖFFNUNGSSPIEL · GRUPPE A</text>
+  <!-- Teams row -->
+  <text x="32" y="272" fill="#ffffff" font-size="28">🇲🇽</text>
+  <text x="72" y="272" fill="#ffffff" font-size="16" font-weight="800">Mexiko</text>
+  <text x="185" y="272" fill="#555577" font-size="16" font-weight="900">vs</text>
+  <text x="218" y="272" fill="#ffffff" font-size="28">🇨🇿</text>
+  <text x="258" y="272" fill="#ffffff" font-size="16" font-weight="800">Tschechien</text>
+  <!-- CTA Button -->
+  <rect x="32" y="284" width="326" height="30" rx="10" fill="rgba(0,210,106,0.15)" stroke="rgba(0,210,106,0.3)" stroke-width="1"/>
+  <text x="145" y="304" fill="#00d26a" font-size="13" font-weight="700">🎯 Jetzt Tipp abgeben</text>
+
+  <!-- STATS GRID -->
+  <rect x="16" y="336" width="171" height="72" rx="12" fill="#141428" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="32" y="362" fill="#8888aa" font-size="10" font-weight="700" letter-spacing="1">OFFENE SPIELE</text>
+  <text x="32" y="394" fill="#ffffff" font-size="26" font-weight="900">72</text>
+
+  <rect x="203" y="336" width="171" height="72" rx="12" fill="#141428" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="219" y="362" fill="#8888aa" font-size="10" font-weight="700" letter-spacing="1">SIMULIERT</text>
+  <text x="219" y="394" fill="#8888aa" font-size="26" font-weight="900">0</text>
+
+  <!-- SIMULATE BUTTON -->
+  <rect x="16" y="422" width="358" height="52" rx="14" fill="url(#simGrad)"/>
+  <defs>
+    <linearGradient id="simGrad" x1="0" y1="0" x2="358" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+  </defs>
+  <text x="130" y="453" fill="#ffffff" font-size="15" font-weight="800">⚽ Spiel simulieren</text>
+
+  <!-- LEADERBOARD PREVIEW -->
+  <text x="16" y="500" fill="#ffffff" font-size="14" font-weight="800">👑 Top 3 Rangliste</text>
+  <text x="310" y="500" fill="#00d26a" font-size="12" font-weight="600">Alle →</text>
+
+  <!-- Row 1 -->
+  <rect x="16" y="510" width="358" height="50" rx="12" fill="rgba(255,215,0,0.05)" stroke="rgba(255,215,0,0.1)" stroke-width="1"/>
+  <text x="32" y="541" fill="#ffd700" font-size="18">🥇</text>
+  <text x="60" y="535" fill="#ffffff" font-size="14" font-weight="700">🧔 Luis</text>
+  <text x="60" y="551" fill="#8888aa" font-size="11">0 Tipps</text>
+  <text x="318" y="541" fill="#00d26a" font-size="14" font-weight="800">100</text>
+  <text x="335" y="541" fill="#555577" font-size="11">➖</text>
+
+  <!-- Row 2 -->
+  <rect x="16" y="566" width="358" height="50" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <text x="32" y="597" fill="#c0c0c0" font-size="18">🥈</text>
+  <text x="60" y="591" fill="#ffffff" font-size="14" font-weight="700">👨 Pablo</text>
+  <text x="60" y="607" fill="#8888aa" font-size="11">0 Tipps</text>
+  <text x="318" y="597" fill="#00d26a" font-size="14" font-weight="800">100</text>
+  <text x="335" y="597" fill="#555577" font-size="11">➖</text>
+
+  <!-- Row 3 -->
+  <rect x="16" y="622" width="358" height="50" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <text x="32" y="653" fill="#cd7f32" font-size="18">🥉</text>
+  <text x="60" y="647" fill="#ffffff" font-size="14" font-weight="700">🧑 Levin</text>
+  <text x="60" y="663" fill="#8888aa" font-size="11">0 Tipps</text>
+  <text x="318" y="653" fill="#00d26a" font-size="14" font-weight="800">100</text>
+  <text x="335" y="653" fill="#555577" font-size="11">➖</text>
+
+  <!-- BOTTOM NAV -->
+  <rect y="756" width="390" height="88" fill="rgba(20,20,40,0.97)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <!-- Active: Home -->
+  <rect x="8" y="762" width="68" height="52" rx="12" fill="rgba(0,210,106,0.1)"/>
+  <text x="30" y="786" fill="#00d26a" font-size="22">🏠</text>
+  <text x="22" y="804" fill="#00d26a" font-size="9" font-weight="700">HOME</text>
+  <!-- Spieltag -->
+  <text x="102" y="786" fill="#666688" font-size="22">⚽</text>
+  <text x="90" y="804" fill="#666688" font-size="9" font-weight="600">SPIELTAG</text>
+  <!-- Bracket -->
+  <text x="185" y="786" fill="#666688" font-size="22">🏆</text>
+  <text x="172" y="804" fill="#666688" font-size="9" font-weight="600">BRACKET</text>
+  <!-- Rangliste -->
+  <text x="263" y="786" fill="#666688" font-size="22">👑</text>
+  <text x="248" y="804" fill="#666688" font-size="9" font-weight="600">RANGLISTE</text>
+  <!-- Profil -->
+  <text x="348" y="786" fill="#666688" font-size="22">👤</text>
+  <text x="338" y="804" fill="#666688" font-size="9" font-weight="600">PROFIL</text>
+</svg>
