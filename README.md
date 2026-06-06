@@ -227,7 +227,7 @@ App (Bottom Navigation)
 - **Svelte 5** – Reaktive UI-Komponenten
 - **Vite 5** – Build-Tool und Dev-Server
 - **Vanilla CSS** – Kein UI-Framework, vollständig eigene Styles (CSS Custom Properties)
-- **@sveltejs/adapter-auto** – Deployment-Adapter
+- **@sveltejs/adapter-static** – Deployment-Adapter (SPA-Modus, `fallback: index.html`)
 
 **Tooling:**
 - IDE: Visual Studio Code
@@ -270,9 +270,9 @@ src/
 - `simulateMatch(matchId)` – Generiert zufälliges Ergebnis, berechnet Payouts für alle Nutzer (inkl. Auto-Tipps für nicht-tippende User), aktualisiert Gems und Trends
 - `resetAll()` – Setzt alle Stores auf Initialzustand zurück
 
-**Deployment:** `npm run build` → statisches Output via `@sveltejs/adapter-auto`.  
+**Deployment:** `npm run build` → statisches Output via `@sveltejs/adapter-static` (SPA-Modus).  
 Deployment auf **Netlify** (kostenlos, automatisch via GitHub-Integration, konfiguriert via `netlify.toml`).  
-URL: https://scintillating-centaur-1294a3.netlify.app
+URL: https://betandbrag.netlify.app
 
 **Besondere Entscheidungen / Trade-offs:**
 - **Kein Backend / keine DB:** Vereinfacht das Setup massiv. localStorage reicht für den Prototyp-Kontext; für Produktion wäre ein Backend nötig.
@@ -380,6 +380,13 @@ Beide Testpersonen fanden die App optisch ansprechend und das Grundkonzept schne
 - **Referenz:** Turnierbaum-Screen (Kap. 3.4.1)
 - **Aus Evaluation abgeleitet?:** Nein – war von Beginn an geplant.
 
+### 4.4 Head-to-Head Vergleich
+
+- **Beschreibung & Nutzen:** In der Rangliste kann jeder Nutzer einen direkten Vergleich mit einem anderen Mitspieler öffnen. Ein Bottom-Sheet zeigt Gems, Tipps, Volltreffer-Quote und Trend beider Spieler nebeneinander – erhöht den sozialen Wettbewerb innerhalb der Gruppe.
+- **Wo umgesetzt:** `src/routes/leaderboard/+page.svelte` – H2H-Button pro Leaderboard-Zeile, `h2hUser`-State steuert das Overlay.
+- **Referenz:** Rangliste-Screen (Kap. 3.4.1)
+- **Aus Evaluation abgeleitet?:** Nein – war von Beginn an als «Could»-Anforderung eingeplant (Kap. 3.1).
+
 ### 4.5 Admin-Panel für echte Spielresultate
 
 - **Beschreibung & Nutzen:** Während der WM 2026 können echte Spielresultate direkt in der App eingetragen werden – ohne Simulation. Ein geschütztes Admin-Panel (`/admin`) zeigt alle 72 Gruppenspiele gefiltert nach Status. Nach Eingabe des offiziellen Endergebnisses werden alle abgegebenen Tipps sofort ausgewertet, Gems vergeben und die Rangliste live aktualisiert. Dies macht die App reell nutzbar während der WM.
@@ -483,7 +490,7 @@ Die KI wurde gezielt für klar abgegrenzte Teilaufgaben eingesetzt:
 
 - **Detaillierte Usability Evaluation:** [USABILITY_EVALUATION.md](./USABILITY_EVALUATION.md)
 - **Mockups:** Siehe [static/mockups/](./static/mockups/) – Dashboard, Spieltag, Rangliste als SVG-Designentwürfe (Kap. 3.3)
-- **Deployment URL:** https://scintillating-centaur-1294a3.netlify.app
+- **Deployment URL:** https://betandbrag.netlify.app
 - **Testpersonen:** Enis (24, Zürich) und Drin (24, Zürich) – Freunde des Entwicklers
 - **Quellen & Lizenzen:**
   - SvelteKit: [kit.svelte.dev](https://kit.svelte.dev) – MIT License
