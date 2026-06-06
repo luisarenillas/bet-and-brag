@@ -455,34 +455,36 @@ Beide Testpersonen fanden die App optisch ansprechend und das Grundkonzept schne
 ### 6.1 KI-Tools
 
 - **Eingesetzte Tools:** Claude Sonnet 4.6 (Anthropic) via Claude Code (CLI)
-- **Zweck & Umfang:** KI wurde unterstützend eingesetzt – zur Verfeinerung und Optimierung der Arbeit. Konkret:
-  - **Turnierbaum-Implementierung:** Unterstützung bei der technischen Umsetzung des horizontalen K.o.-Brackets (CSS-Connector-Linien, Runden-Logik R16 → QF → SF → Final, klickbare Team-Picks)
-  - **Enddesign-Verfeinerung:** Visuelle Feinarbeiten am Dark Theme (Farbwerte, Abstände, Neon-Akzente) sowie Layout-Korrekturen an einzelnen Komponenten
-  - **Dokumentation:** Strukturierung und sprachliche Ausformulierung der Projektdokumentation (README.md) auf Basis der Inhalte
-  - **Fehlerbehebung:** Diagnose und Behebung spezifischer Build-Fehler (z. B. Paket-Kompatibilitätsprobleme, Svelte-Syntax-Fehler), nachdem diese eigenständig identifiziert wurden
-
+- **Zweck & Umfang:** KI wurde intensiv als Entwicklungspartner eingesetzt – sowohl für einfachere als auch für technisch komplexe Aufgaben. Die Konzeption, die inhaltlichen Entscheidungen und die Projektsteuerung lagen durchgehend beim Entwickler. Konkret wurde KI eingesetzt für:
+  - **Komplexe Implementierungen:** Turnierbaum-Logik (K.o.-Bracket, Connector-Linien, Runden-Kette R32→Finale), Netlify-Deployment-Konfiguration (`adapter-static`, `_redirects`, SPA-Routing), dynamische Stores mit `derived` und `persist`-Wrapper
+  - **Bug-Diagnose und -Behebung:** Netlify-Build-Fehler (fehlende Route-Files in git, SSR-Konflikte, Redirect-Konflikte), localStorage-Versionierung, Click-Blocking durch CSS `::before`-Pseudo-Element
+  - **Dokumentation:** Strukturierung und Ausformulierung der README-Kapitel auf Basis eigener Notizen, Entscheidungen und Testergebnisse
+  - **Einfachere Aufgaben:** Code-Reviews, Styling-Korrekturen, Umbenennung von Variablen, kleinere UI-Anpassungen
 
 ### 6.2 Prompt-Vorgehen
 
-Die KI wurde gezielt für klar abgegrenzte Teilaufgaben eingesetzt:
+KI wurde mit klaren, problemorientierten Prompts gesteuert:
 
-1. **Design-Verfeinerung:** Konkrete visuelle Probleme wurden beschrieben (z. B. «Die Abstände im Leaderboard wirken uneinheitlich») und KI-Vorschläge als Inspirationsquelle genutzt – die finale Entscheidung lag stets beim Entwickler.
+1. **Technische Probleme:** Fehlermeldung + relevanter Code-Ausschnitt wurden übergeben, die KI lieferte Diagnose und Lösungsvorschlag – der Entwickler entschied, ob und wie der Vorschlag übernommen wird.
 
-2. **Dokumentationshilfe:** Eigenständig verfasste Inhalte wurden der KI zur sprachlichen Glättung und Strukturierung übergeben. Die inhaltliche Substanz (Erkenntnisse, Entscheidungen, Begründungen) stammt ausnahmslos aus eigener Arbeit.
+2. **Implementierungsaufgaben:** Anforderung wurde präzise beschrieben (z. B. «Baue einen horizontalen WM-Bracket mit 48 Teams, klickbaren Picks und automatischer Weitergabe»), die KI generierte den Code, der Entwickler testete, überprüfte und integrierte ihn.
 
-3. **Fehlerdiagnose:** Bei Build-Fehlern wurde die Fehlermeldung zusammen mit dem relevanten Code-Ausschnitt übergeben, um die Ursache zu verstehen und gezielt zu beheben.
+3. **Dokumentation:** Eigene Stichpunkte, Beobachtungen aus dem Usability Test und Projektentscheidungen wurden als Grundlage übergeben – die KI strukturierte und formulierte daraus die finalen Texte.
 
-**Beispiel-Prompt:** *«Ich habe diesen Build-Fehler erhalten: [Fehlermeldung]. Hier ist der betroffene Code-Abschnitt. Was ist die Ursache und wie behebe ich es?»*
+**Beispiel-Prompts:**
+- *«Netlify zeigt 404 für /matches obwohl die Route existiert. Hier der Deploy-Log: [Log]. Was ist die Ursache?»*
+- *«Erstelle den WM 2026 Turnierbaum als SvelteKit-Komponente mit 12 Gruppen A–L und K.o.-Phase ab Runde der 32»*
+- *«Schreibe Kapitel 3.5 Validate basierend auf diesen Usability-Test-Notizen: [Notizen]»*
 
 ### 6.3 Reflexion
 
-**Nutzen:** KI war hilfreich als «zweite Meinung» bei Designfragen und als effizienter Debugging-Partner. Gerade bei kryptischen Fehlermeldungen (z. B. Paket-Versionskonflikte) sparte die KI-Unterstützung wertvolle Zeit.
+**Nutzen:** KI hat die Entwicklungszeit deutlich verkürzt – besonders bei komplexen technischen Problemen wie dem Netlify-Deployment (mehrere verschachtelte Fehlerquellen) und der Turnierbaum-Implementierung. Ohne KI-Unterstützung wäre der Prototyp in diesem Umfang im gegebenen Zeitrahmen nicht realisierbar gewesen.
 
-**Grenzen:** KI-Vorschläge zum Design waren nicht immer direkt übertragbar und mussten angepasst werden. Bei der Dokumentation musste darauf geachtet werden, dass die eigene Stimme und die konkreten Projekterfahrungen erhalten blieben – generische Formulierungen wurden überarbeitet.
+**Grenzen:** KI-Vorschläge mussten regelmässig angepasst werden – insbesondere beim Deployment, wo mehrere Lösungsansätze iteriert wurden, bevor die richtige Kombination (`adapter-static` + fehlende Route-Files in git) gefunden wurde. Die KI lieferte jeweils Teilantworten, die der Entwickler zusammenführen und testen musste.
 
-**Qualitätssicherung:** Alle Änderungen wurden mit `npm run build` verifiziert (0 Errors) und manuell in Chrome DevTools (Mobile-Simulation) getestet. KI-generierte Code-Vorschläge wurden stets verstanden und nicht blind übernommen.
+**Qualitätssicherung:** Alle Änderungen wurden mit `npm run build` verifiziert und manuell in Chrome DevTools (Mobile-Simulation, 390×844 px) sowie auf der Live-URL `betandbrag.netlify.app` getestet. KI-generierter Code wurde verstanden, bevor er übernommen wurde.
 
-**Urheberrecht:** Es wurden keine urheberrechtlich geschützten Assets (Bilder, Logos, Musik) verwendet. Alle verwendeten Elemente sind Emoji (Unicode-Standard, lizenzfrei) oder eigener Code.
+**Urheberrecht:** Es wurden keine urheberrechtlich geschützten Assets verwendet. Alle Elemente sind Emoji (Unicode-Standard, lizenzfrei) oder eigener Code.
 
 ---
 
