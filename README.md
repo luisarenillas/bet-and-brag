@@ -168,6 +168,24 @@ Zentrale Designentscheidungen im Mockup:
 
 ### 3.4 Prototype
 
+#### 3.4.0 Screenshots der fertigen App
+
+Die folgenden Screenshots zeigen den implementierten Prototyp in der finalen Version (Mobile, 390 × 844 px).
+
+| Dashboard | Spieltag | Tipp-Abgabe |
+|:---------:|:--------:|:-----------:|
+| ![Dashboard](static/screenshots/dashboard.png) | ![Spieltag](static/screenshots/spieltag.png) | ![Tipp-Abgabe](static/screenshots/tipp-abgabe.png) |
+
+| Turnierbaum | Rangliste | Profil |
+|:-----------:|:---------:|:------:|
+| ![Turnierbaum](static/screenshots/bracket.png) | ![Rangliste](static/screenshots/rangliste.png) | ![Profil](static/screenshots/profil.png) |
+
+| Admin-Panel (Erweiterung) |
+|:-------------------------:|
+| ![Admin-Panel](static/screenshots/admin.png) |
+
+---
+
 #### 3.4.1 Entwurf (Design)
 
 **Informationsarchitektur (5 Hauptseiten):**
