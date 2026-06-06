@@ -168,6 +168,8 @@ Zentrale Designentscheidungen im Mockup:
 
 ### 3.4 Prototype
 
+**Demo-Video:** [▶ Bet & Brag – Screencast (Google Drive)](https://drive.google.com/file/d/1s_vQZDVyMcthiPzcB8nGhsQvChlc7a6K/view?usp=share_link)
+
 #### 3.4.0 Screenshots der fertigen App
 
 Die folgenden Screenshots zeigen den implementierten Prototyp in der finalen Version (Mobile, 390 × 844 px).
