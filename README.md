@@ -50,7 +50,7 @@
   | Tendenz richtig | +20 |
   | Exaktes Ergebnis | +30 |
   | Tipp falsch | +0 (Einsatz verloren) |
-  | Startguthaben | 100 |
+  | Startguthaben | 200 |
 
 - **Annahmen:** Nutzer sind motivierter, wenn sie eine virtuelle Währung auf dem Spiel haben, als wenn es nur Punkte gibt. Der soziale Vergleich (Rangliste mit Zonen) erhöht die Bindung.
 
@@ -187,7 +187,7 @@ App (Bottom Navigation)
 | Screen | Beschreibung |
 |--------|--------------|
 | **Dashboard** | Countdown-Timer (Echtzeit), Eröffnungsspiel-Karte mit direktem Tipp-Button, Live-Simulations-Karte, Leaderboard-Preview Top 3, Stats-Kacheln (offene / simulierte Spiele) |
-| **WM-Spieltag** | Filter-Tabs (Gruppenphase / Meine Tipps / Live / K.o.), alle 36 Gruppenspiele nach Gruppen A–F, Status-Badges (OPEN / Getippt / Endstand), Tipp- und Bearbeiten-Buttons |
+| **WM-Spieltag** | Filter-Tabs (Gruppenphase / Meine Tipps / Live / K.o.), alle 72 Gruppenspiele nach Gruppen A–L (48 Teams), Status-Badges (OPEN / Getippt / Endstand), Tipp- und Bearbeiten-Buttons |
 | **Tipp-Abgabe** | Grosse Flaggen-Anzeige beider Teams, Score-Input mit +/− Stepper, Tendenz-Label (live), fixe Einsatz-Anzeige 10 Gems, Auszahlungs-Tabelle (Volltreffer/Tendenz/Falsch), Speichern-Button |
 | **Turnierbaum** | Tab «Gruppenphase»: 6 Gruppen-Tabellen mit Live-Standings aus simulierten Spielen; Tab «K.o.-Baum»: horizontaler Bracket Achtelfinale → Finale → Weltmeister-Slot, klickbare Team-Picks |
 | **Rangliste** | «Bragging Rights Leaderboard», 3 Zonen (🥇 Final-Zone / Mittelfeld / 💀 Gurken-Zone), Rang, Avatar, Name, Gems, Trend-Indikator (🟢↑/🔴↓/➖), H2H-Button mit Bottom-Sheet |
@@ -237,7 +237,7 @@ src/
 | Store | Typ | Inhalt |
 |-------|-----|--------|
 | `users` | `persist writable` | 10 Spieler mit Gems, Trend, Stats |
-| `matches` | `persist writable` | 36 WM-Gruppenspiele mit Status & Ergebnis |
+| `matches` | `persist writable` | 72 WM-Gruppenspiele (Gruppen A–L) mit Status & Ergebnis |
 | `tips` | `persist writable` | Alle abgegebenen Tipps mit Payout-Status |
 | `currentUserId` | `writable` | Aktiver Nutzer (Luis, ID 1) |
 | `notification` | `writable` | Globales Overlay (Gewinn/Verlust/Info) |
@@ -251,8 +251,8 @@ src/
 - `resetAll()` – Setzt alle Stores auf Initialzustand zurück
 
 **Deployment:** `npm run build` → statisches Output via `@sveltejs/adapter-auto`.  
-Empfohlen: Deployment auf **Vercel** (kostenlos, SvelteKit-native): `vercel --prod`  
-URL: *(nach Deployment eintragen)*
+Deployment auf **Netlify** (kostenlos, automatisch via GitHub-Integration, konfiguriert via `netlify.toml`).  
+URL: *(nach Netlify-Deploy eintragen)*
 
 **Besondere Entscheidungen / Trade-offs:**
 - **Kein Backend / keine DB:** Vereinfacht das Setup massiv. localStorage reicht für den Prototyp-Kontext; für Produktion wäre ein Backend nötig.
@@ -462,8 +462,8 @@ Die KI wurde gezielt für klar abgegrenzte Teilaufgaben eingesetzt:
 ## 7. Anhang
 
 - **Detaillierte Usability Evaluation:** [USABILITY_EVALUATION.md](./USABILITY_EVALUATION.md)
-- **Figma Mockup:** *(Link eintragen nach Fertigstellung)*
-- **Deployment URL:** *(nach Vercel/Netlify-Deploy eintragen)*
+- **Mockups:** Siehe [static/mockups/](./static/mockups/) – Dashboard, Spieltag, Rangliste als SVG-Designentwürfe (Kap. 3.3)
+- **Deployment URL:** *(nach Netlify-Deploy eintragen)*
 - **Testpersonen:** Enis (24, Zürich) und Drin (24, Zürich) – Freunde des Entwicklers
 - **Quellen & Lizenzen:**
   - SvelteKit: [kit.svelte.dev](https://kit.svelte.dev) – MIT License
