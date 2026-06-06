@@ -270,7 +270,7 @@ src/
 
 **Deployment:** `npm run build` → statisches Output via `@sveltejs/adapter-auto`.  
 Deployment auf **Netlify** (kostenlos, automatisch via GitHub-Integration, konfiguriert via `netlify.toml`).  
-URL: *(nach Netlify-Deploy eintragen)*
+URL: https://scintillating-centaur-1294a3.netlify.app
 
 **Besondere Entscheidungen / Trade-offs:**
 - **Kein Backend / keine DB:** Vereinfacht das Setup massiv. localStorage reicht für den Prototyp-Kontext; für Produktion wäre ein Backend nötig.
@@ -481,7 +481,7 @@ Die KI wurde gezielt für klar abgegrenzte Teilaufgaben eingesetzt:
 
 - **Detaillierte Usability Evaluation:** [USABILITY_EVALUATION.md](./USABILITY_EVALUATION.md)
 - **Mockups:** Siehe [static/mockups/](./static/mockups/) – Dashboard, Spieltag, Rangliste als SVG-Designentwürfe (Kap. 3.3)
-- **Deployment URL:** *(nach Netlify-Deploy eintragen)*
+- **Deployment URL:** https://scintillating-centaur-1294a3.netlify.app
 - **Testpersonen:** Enis (24, Zürich) und Drin (24, Zürich) – Freunde des Entwicklers
 - **Quellen & Lizenzen:**
   - SvelteKit: [kit.svelte.dev](https://kit.svelte.dev) – MIT License
