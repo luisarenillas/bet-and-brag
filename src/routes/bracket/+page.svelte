@@ -43,85 +43,112 @@
   });
 
   // ── K.O. BRACKET (WM 2026: R32 → R16 → QF → SF → Final) ─────────────────
-  // 48 Teams: Top-2 jeder Gruppe (24) + 8 beste Dritte = 32 Teams → 16 R32-Spiele
+  // Echte Paarungen Stand 30.06.2026
   const r32Matches = [
-    { id:'r32-0',  topSlot:{label:'1. Gr. A',grp:'A',pos:0}, botSlot:{label:'2. Gr. B',grp:'B',pos:1} },
-    { id:'r32-1',  topSlot:{label:'1. Gr. C',grp:'C',pos:0}, botSlot:{label:'2. Gr. D',grp:'D',pos:1} },
-    { id:'r32-2',  topSlot:{label:'1. Gr. E',grp:'E',pos:0}, botSlot:{label:'2. Gr. F',grp:'F',pos:1} },
-    { id:'r32-3',  topSlot:{label:'1. Gr. G',grp:'G',pos:0}, botSlot:{label:'2. Gr. H',grp:'H',pos:1} },
-    { id:'r32-4',  topSlot:{label:'1. Gr. I',grp:'I',pos:0}, botSlot:{label:'2. Gr. J',grp:'J',pos:1} },
-    { id:'r32-5',  topSlot:{label:'1. Gr. K',grp:'K',pos:0}, botSlot:{label:'2. Gr. L',grp:'L',pos:1} },
-    { id:'r32-6',  topSlot:{label:'1. Gr. B',grp:'B',pos:0}, botSlot:{label:'2. Gr. A',grp:'A',pos:1} },
-    { id:'r32-7',  topSlot:{label:'1. Gr. D',grp:'D',pos:0}, botSlot:{label:'2. Gr. C',grp:'C',pos:1} },
-    { id:'r32-8',  topSlot:{label:'1. Gr. F',grp:'F',pos:0}, botSlot:{label:'2. Gr. E',grp:'E',pos:1} },
-    { id:'r32-9',  topSlot:{label:'1. Gr. H',grp:'H',pos:0}, botSlot:{label:'2. Gr. G',grp:'G',pos:1} },
-    { id:'r32-10', topSlot:{label:'1. Gr. J',grp:'J',pos:0}, botSlot:{label:'2. Gr. I',grp:'I',pos:1} },
-    { id:'r32-11', topSlot:{label:'1. Gr. L',grp:'L',pos:0}, botSlot:{label:'2. Gr. K',grp:'K',pos:1} },
-    { id:'r32-12', topSlot:{label:'Bester 3. (A-D)',grp:null,pos:null}, botSlot:{label:'Bester 3. (E-H)',grp:null,pos:null} },
-    { id:'r32-13', topSlot:{label:'Bester 3. (I-L)',grp:null,pos:null}, botSlot:{label:'Bester 3. (mix)',grp:null,pos:null} },
-    { id:'r32-14', topSlot:{label:'Bester 3. (mix)',grp:null,pos:null}, botSlot:{label:'Bester 3. (mix)',grp:null,pos:null} },
-    { id:'r32-15', topSlot:{label:'Bester 3. (mix)',grp:null,pos:null}, botSlot:{label:'Bester 3. (mix)',grp:null,pos:null} },
+    { id:'r32-0',  top:{name:'Südafrika',flag:'🇿🇦'}, bot:{name:'Kanada',flag:'🇨🇦'},      result:'0:1',    winner:'bot'  },
+    { id:'r32-1',  top:{name:'Deutschland',flag:'🇩🇪'}, bot:{name:'Paraguay',flag:'🇵🇾'},   result:'1:1 n.E.',winner:'bot'  },
+    { id:'r32-2',  top:{name:'Niederlande',flag:'🇳🇱'}, bot:{name:'Marokko',flag:'🇲🇦'},    result:'1:1 n.E.',winner:'bot'  },
+    { id:'r32-3',  top:{name:'Brasilien',flag:'🇧🇷'},   bot:{name:'Japan',flag:'🇯🇵'},       result:'2:1',    winner:'top'  },
+    { id:'r32-4',  top:{name:'Elfenbeinküste',flag:'🇨🇮'}, bot:{name:'Norwegen',flag:'🇳🇴'}, result:'1:2',    winner:'bot'  },
+    { id:'r32-5',  top:{name:'Frankreich',flag:'🇫🇷'}, bot:{name:'Schweden',flag:'🇸🇪'},    result:'4:1',    winner:'top'  },
+    { id:'r32-6',  top:{name:'Mexiko',flag:'🇲🇽'},      bot:{name:'Ecuador',flag:'🇪🇨'},     result:null,     winner:null   },
+    { id:'r32-7',  top:{name:'England',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿'},   bot:{name:'DR Kongo',flag:'🇨🇩'},    result:null,     winner:null   },
+    { id:'r32-8',  top:{name:'USA',flag:'🇺🇸'},          bot:{name:'Bosnien',flag:'🇧🇦'},     result:null,     winner:null   },
+    { id:'r32-9',  top:{name:'Belgien',flag:'🇧🇪'},     bot:{name:'Senegal',flag:'🇸🇳'},     result:null,     winner:null   },
+    { id:'r32-10', top:{name:'Portugal',flag:'🇵🇹'},    bot:{name:'Kroatien',flag:'🇭🇷'},    result:null,     winner:null   },
+    { id:'r32-11', top:{name:'Spanien',flag:'🇪🇸'},     bot:{name:'Österreich',flag:'🇦🇹'},  result:null,     winner:null   },
+    { id:'r32-12', top:{name:'Schweiz',flag:'🇨🇭'},     bot:{name:'Algerien',flag:'🇩🇿'},    result:null,     winner:null   },
+    { id:'r32-13', top:{name:'Argentinien',flag:'🇦🇷'}, bot:{name:'Kap Verde',flag:'🇨🇻'},  result:null,     winner:null   },
+    { id:'r32-14', top:{name:'Kolumbien',flag:'🇨🇴'},   bot:{name:'Ghana',flag:'🇬🇭'},       result:null,     winner:null   },
+    { id:'r32-15', top:{name:'Australien',flag:'🇦🇺'},  bot:{name:'Ägypten',flag:'🇪🇬'},     result:null,     winner:null   },
   ];
 
-  // R16: 8 Spiele (Sieger je 2 R32-Spiele treffen aufeinander)
+  // R16: 8 Spiele
   const r16Matches = [
-    { id:'r16-0', r32top:0,  r32bot:8  },
-    { id:'r16-1', r32top:1,  r32bot:9  },
-    { id:'r16-2', r32top:2,  r32bot:10 },
-    { id:'r16-3', r32top:3,  r32bot:11 },
-    { id:'r16-4', r32top:4,  r32bot:12 },
-    { id:'r16-5', r32top:5,  r32bot:13 },
-    { id:'r16-6', r32top:6,  r32bot:14 },
-    { id:'r16-7', r32top:7,  r32bot:15 },
+    { id:'r16-0', top:0, bot:1  },
+    { id:'r16-1', top:2, bot:3  },
+    { id:'r16-2', top:4, bot:5  },
+    { id:'r16-3', top:6, bot:7  },
+    { id:'r16-4', top:8, bot:9  },
+    { id:'r16-5', top:10, bot:11 },
+    { id:'r16-6', top:12, bot:13 },
+    { id:'r16-7', top:14, bot:15 },
   ];
 
   // QF: 4 Spiele
   const qfMatches = [
-    { id:'qf-0', r16top:0, r16bot:4 },
-    { id:'qf-1', r16top:1, r16bot:5 },
-    { id:'qf-2', r16top:2, r16bot:6 },
-    { id:'qf-3', r16top:3, r16bot:7 },
+    { id:'qf-0', top:0, bot:1 },
+    { id:'qf-1', top:2, bot:3 },
+    { id:'qf-2', top:4, bot:5 },
+    { id:'qf-3', top:6, bot:7 },
   ];
 
   // HF: 2 Spiele
   const sfMatches = [
-    { id:'sf-0', qftop:0, qfbot:2 },
-    { id:'sf-1', qftop:1, qfbot:3 },
+    { id:'sf-0', top:0, bot:1 },
+    { id:'sf-1', top:2, bot:3 },
   ];
 
-  let picks = {};
+  // Vorausgefüllte Picks für abgeschlossene Spiele
+  let picks = {
+    'r32-0': 'bot', 'r32-1': 'bot', 'r32-2': 'bot',
+    'r32-3': 'top', 'r32-4': 'bot', 'r32-5': 'top',
+  };
+
   function pick(id, side) {
+    const m = r32Matches.find(m => m.id === id)
+           || r16Matches.find(m => m.id === id)
+           || qfMatches.find(m => m.id === id)
+           || sfMatches.find(m => m.id === id);
+    if (m?.winner) return; // abgeschlossene Spiele nicht änderbar
     picks = { ...picks, [id]: picks[id] === side ? null : side };
   }
 
-  function resolvedTeam(slot, $std) {
-    if (!slot.grp) return { name: slot.label, flag: '' };
-    const t = $std[slot.grp]?.[slot.pos];
-    return t ? { name: t.name, flag: t.flag } : { name: slot.label, flag: '' };
+  function getR32Team(idx, side) {
+    const m = r32Matches[idx];
+    if (!m) return null;
+    return side === 'top' ? m.top : m.bot;
   }
 
-  function getR32Winner(matchIdx, side, $std) {
-    const m = r32Matches[matchIdx];
-    if (!m) return null;
-    return resolvedTeam(side === 'top' ? m.topSlot : m.botSlot, $std);
+  function getWinner(matchId, matchList, getTeamFn) {
+    const p = picks[matchId];
+    if (!p) return null;
+    return getTeamFn(p);
   }
 
-  function getR16Winner(matchIdx, side, $std) {
-    const m = r16Matches[matchIdx];
+  function r32WinnerTeam(idx) {
+    const m = r32Matches[idx];
     if (!m) return null;
-    const r32Idx = side === 'top' ? m.r32top : m.r32bot;
-    const r32pick = picks[`r32-${r32Idx}`];
-    if (!r32pick) return null;
-    return getR32Winner(r32Idx, r32pick, $std);
+    const p = picks[m.id];
+    if (!p) return null;
+    return p === 'top' ? m.top : m.bot;
   }
 
-  function getQFWinner(matchIdx, side, $std) {
-    const m = r16Matches[matchIdx];
+  function r16WinnerTeam(idx) {
+    const m = r16Matches[idx];
     if (!m) return null;
-    const r16Idx = side === 'top' ? matchIdx : matchIdx;
-    const r16pick = picks[`r16-${matchIdx}`];
-    if (!r16pick) return null;
-    return getR16Winner(matchIdx, r16pick, $std);
+    const p = picks[m.id];
+    if (!p) return null;
+    const r32Idx = p === 'top' ? m.top : m.bot;
+    return r32WinnerTeam(r32Idx);
+  }
+
+  function qfWinnerTeam(idx) {
+    const m = qfMatches[idx];
+    if (!m) return null;
+    const p = picks[m.id];
+    if (!p) return null;
+    const r16Idx = p === 'top' ? m.top : m.bot;
+    return r16WinnerTeam(r16Idx);
+  }
+
+  function sfWinnerTeam(idx) {
+    const m = sfMatches[idx];
+    if (!m) return null;
+    const p = picks[m.id];
+    if (!p) return null;
+    const qfIdx = p === 'top' ? m.top : m.bot;
+    return qfWinnerTeam(qfIdx);
   }
 </script>
 
@@ -361,33 +388,27 @@
           <div class="rc-label">Runde der 32</div>
           <div class="rc-matches">
             {#each r32Matches as m}
-              {@const hasPick = !!picks[m.id]}
-              <div class="bm clickable" class:has-pick={hasPick}>
+              {@const done = !!m.winner}
+              <div class="bm" class:clickable={!done} class:has-pick={!!picks[m.id]}>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
-                <div class="bt clickable"
+                <div class="bt" class:clickable={!done}
                      class:winner={picks[m.id]==='top'}
                      class:loser={picks[m.id]==='bot'}
                      on:click|stopPropagation={() => pick(m.id, 'top')}>
-                  {#if m.topSlot.grp}
-                    <span class="grp-badge">{m.topSlot.pos===0?'1.':'2.'}</span>
-                    <span class="tn">Gr. {m.topSlot.grp}</span>
-                  {:else}
-                    <span class="tn" style="color:#666688;font-size:0.58rem">{m.topSlot.label}</span>
-                  {/if}
-                  {#if picks[m.id]==='top'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
+                  <span class="tf">{m.top.flag}</span>
+                  <span class="tn">{m.top.name}</span>
+                  {#if m.result}<span class="sc">{picks[m.id]==='top' ? '✓' : m.result.split(':')[0]}</span>
+                  {:else if picks[m.id]==='top'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
-                <div class="bt clickable"
+                <div class="bt" class:clickable={!done}
                      class:winner={picks[m.id]==='bot'}
                      class:loser={picks[m.id]==='top'}
                      on:click|stopPropagation={() => pick(m.id, 'bot')}>
-                  {#if m.botSlot.grp}
-                    <span class="grp-badge">{m.botSlot.pos===0?'1.':'2.'}</span>
-                    <span class="tn">Gr. {m.botSlot.grp}</span>
-                  {:else}
-                    <span class="tn" style="color:#666688;font-size:0.58rem">{m.botSlot.label}</span>
-                  {/if}
-                  {#if picks[m.id]==='bot'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
+                  <span class="tf">{m.bot.flag}</span>
+                  <span class="tn">{m.bot.name}</span>
+                  {#if m.result}<span class="sc">{picks[m.id]==='bot' ? '✓' : m.result.split(':')[1]?.split(' ')[0]}</span>
+                  {:else if picks[m.id]==='bot'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
               </div>
             {/each}
@@ -409,25 +430,17 @@
         <div class="rc">
           <div class="rc-label">Achtelfinale</div>
           <div class="rc-matches">
-            {#each r16Matches as m}
-              {@const hasPick = !!picks[m.id]}
-              {@const topWin = picks[`r32-${m.r32top}`]}
-              {@const botWin = picks[`r32-${m.r32bot}`]}
-              {@const topTeam = topWin ? resolvedTeam(topWin==='top' ? r32Matches[m.r32top].topSlot : r32Matches[m.r32top].botSlot, $standings) : null}
-              {@const botTeam = botWin ? resolvedTeam(botWin==='top' ? r32Matches[m.r32bot].topSlot : r32Matches[m.r32bot].botSlot, $standings) : null}
-              <div class="bm clickable" class:has-pick={hasPick}>
+            {#each r16Matches as m, mi}
+              {@const topTeam = r32WinnerTeam(m.top)}
+              {@const botTeam = r32WinnerTeam(m.bot)}
+              <div class="bm clickable" class:has-pick={!!picks[m.id]}>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <div class="bt clickable"
                      class:winner={picks[m.id]==='top'}
                      class:loser={picks[m.id]==='bot'}
                      on:click={() => pick(m.id, 'top')}>
-                  {#if topTeam}
-                    <span class="tf">{topTeam.flag}</span>
-                    <span class="tn">{topTeam.name}</span>
-                  {:else}
-                    <span class="tf">🏳</span>
-                    <span class="tn" style="color:#555577">Sieger R32-{m.r32top+1}</span>
-                  {/if}
+                  {#if topTeam}<span class="tf">{topTeam.flag}</span><span class="tn">{topTeam.name}</span>
+                  {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger Sp. {m.top+1}</span>{/if}
                   {#if picks[m.id]==='top'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -435,13 +448,8 @@
                      class:winner={picks[m.id]==='bot'}
                      class:loser={picks[m.id]==='top'}
                      on:click={() => pick(m.id, 'bot')}>
-                  {#if botTeam}
-                    <span class="tf">{botTeam.flag}</span>
-                    <span class="tn">{botTeam.name}</span>
-                  {:else}
-                    <span class="tf">🏳</span>
-                    <span class="tn" style="color:#555577">Sieger R32-{m.r32bot+1}</span>
-                  {/if}
+                  {#if botTeam}<span class="tf">{botTeam.flag}</span><span class="tn">{botTeam.name}</span>
+                  {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger Sp. {m.bot+1}</span>{/if}
                   {#if picks[m.id]==='bot'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
               </div>
@@ -465,15 +473,16 @@
           <div class="rc-label">Viertelfinale</div>
           <div class="rc-matches">
             {#each qfMatches as m}
-              {@const hasPick = !!picks[m.id]}
-              <div class="bm clickable" class:has-pick={hasPick}>
+              {@const topTeam = r16WinnerTeam(m.top)}
+              {@const botTeam = r16WinnerTeam(m.bot)}
+              <div class="bm clickable" class:has-pick={!!picks[m.id]}>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <div class="bt clickable"
                      class:winner={picks[m.id]==='top'}
                      class:loser={picks[m.id]==='bot'}
                      on:click={() => pick(m.id, 'top')}>
-                  <span class="tf">🏳</span>
-                  <span class="tn" style="color:#555577">Sieger AF-{m.r16top+1}</span>
+                  {#if topTeam}<span class="tf">{topTeam.flag}</span><span class="tn">{topTeam.name}</span>
+                  {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger AF-{m.top+1}</span>{/if}
                   {#if picks[m.id]==='top'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -481,8 +490,8 @@
                      class:winner={picks[m.id]==='bot'}
                      class:loser={picks[m.id]==='top'}
                      on:click={() => pick(m.id, 'bot')}>
-                  <span class="tf">🏳</span>
-                  <span class="tn" style="color:#555577">Sieger AF-{m.r16bot+1}</span>
+                  {#if botTeam}<span class="tf">{botTeam.flag}</span><span class="tn">{botTeam.name}</span>
+                  {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger AF-{m.bot+1}</span>{/if}
                   {#if picks[m.id]==='bot'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
               </div>
@@ -506,15 +515,16 @@
           <div class="rc-label">Halbfinale</div>
           <div class="rc-matches">
             {#each sfMatches as m}
-              {@const hasPick = !!picks[m.id]}
-              <div class="bm clickable" class:has-pick={hasPick}>
+              {@const topTeam = qfWinnerTeam(m.top)}
+              {@const botTeam = qfWinnerTeam(m.bot)}
+              <div class="bm clickable" class:has-pick={!!picks[m.id]}>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <div class="bt clickable"
                      class:winner={picks[m.id]==='top'}
                      class:loser={picks[m.id]==='bot'}
                      on:click={() => pick(m.id, 'top')}>
-                  <span class="tf">🏳</span>
-                  <span class="tn" style="color:#555577">Sieger VF-{m.qftop+1}</span>
+                  {#if topTeam}<span class="tf">{topTeam.flag}</span><span class="tn">{topTeam.name}</span>
+                  {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger VF-{m.top+1}</span>{/if}
                   {#if picks[m.id]==='top'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -522,8 +532,8 @@
                      class:winner={picks[m.id]==='bot'}
                      class:loser={picks[m.id]==='top'}
                      on:click={() => pick(m.id, 'bot')}>
-                  <span class="tf">🏳</span>
-                  <span class="tn" style="color:#555577">Sieger VF-{m.qfbot+1}</span>
+                  {#if botTeam}<span class="tf">{botTeam.flag}</span><span class="tn">{botTeam.name}</span>
+                  {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger VF-{m.bot+1}</span>{/if}
                   {#if picks[m.id]==='bot'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
                 </div>
               </div>
@@ -544,28 +554,28 @@
         <div class="rc">
           <div class="rc-label lbl-final">🏆 Finale</div>
           <div class="rc-matches">
-            {#each [picks['final']] as _fp}
-              <div class="bm clickable is-final" class:has-pick={!!_fp}>
-                <!-- svelte-ignore a11y_click_events_have_key_events -->
-                <div class="bt clickable"
-                     class:winner={picks['final']==='top'}
-                     class:loser={picks['final']==='bot'}
-                     on:click={() => pick('final', 'top')}>
-                  <span class="tf">🏳</span>
-                  <span class="tn" style="color:#555577">Sieger HF-1</span>
-                  {#if picks['final']==='top'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
-                </div>
-                <!-- svelte-ignore a11y_click_events_have_key_events -->
-                <div class="bt clickable"
-                     class:winner={picks['final']==='bot'}
-                     class:loser={picks['final']==='top'}
-                     on:click={() => pick('final', 'bot')}>
-                  <span class="tf">🏳</span>
-                  <span class="tn" style="color:#555577">Sieger HF-2</span>
-                  {#if picks['final']==='bot'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
-                </div>
+            {@const ft1 = sfWinnerTeam(0)}
+            {@const ft2 = sfWinnerTeam(1)}
+            <div class="bm clickable is-final" class:has-pick={!!picks['final']}>
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
+              <div class="bt clickable"
+                   class:winner={picks['final']==='top'}
+                   class:loser={picks['final']==='bot'}
+                   on:click={() => pick('final', 'top')}>
+                {#if ft1}<span class="tf">{ft1.flag}</span><span class="tn">{ft1.name}</span>
+                {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger HF-1</span>{/if}
+                {#if picks['final']==='top'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
               </div>
-            {/each}
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
+              <div class="bt clickable"
+                   class:winner={picks['final']==='bot'}
+                   class:loser={picks['final']==='top'}
+                   on:click={() => pick('final', 'bot')}>
+                {#if ft2}<span class="tf">{ft2.flag}</span><span class="tn">{ft2.name}</span>
+                {:else}<span class="tf">🏳</span><span class="tn" style="color:#555577">Sieger HF-2</span>{/if}
+                {#if picks['final']==='bot'}<span class="sc">✓</span>{:else}<span class="dot"></span>{/if}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -582,32 +592,12 @@
           <div class="champ-lbl">Weltmeister</div>
           <div class="champ-box">
             {#if picks['final']}
-              {@const sfIdx = picks['final'] === 'top' ? 0 : 1}
-              {@const sfPick = picks[`sf-${sfIdx}`]}
-              {#if sfPick}
-                {@const qfIdx = sfPick === 'top' ? sfMatches[sfIdx].qftop : sfMatches[sfIdx].qfbot}
-                {@const qfPick = picks[`qf-${qfIdx}`]}
-                {#if qfPick}
-                  {@const r16Idx = qfPick === 'top' ? qfMatches[qfIdx].r16top : qfMatches[qfIdx].r16bot}
-                  {@const r16Pick = picks[`r16-${r16Idx}`]}
-                  {#if r16Pick}
-                    {@const r32Idx = r16Pick === 'top' ? r16Matches[r16Idx].r32top : r16Matches[r16Idx].r32bot}
-                    {@const r32Pick = picks[`r32-${r32Idx}`]}
-                    {#if r32Pick}
-                      {@const finalTeam = resolvedTeam(r32Pick==='top' ? r32Matches[r32Idx].topSlot : r32Matches[r32Idx].botSlot, $standings)}
-                      <span class="champ-flag">{finalTeam.flag || '🏳'}</span>
-                      <div class="champ-name">{finalTeam.name}</div>
-                    {:else}
-                      <div class="champ-tbd">Pick R32 Team</div>
-                    {/if}
-                  {:else}
-                    <div class="champ-tbd">Pick AF Team</div>
-                  {/if}
-                {:else}
-                  <div class="champ-tbd">Pick VF Team</div>
-                {/if}
+              {@const champTeam = picks['final'] === 'top' ? sfWinnerTeam(0) : sfWinnerTeam(1)}
+              {#if champTeam}
+                <span class="champ-flag">{champTeam.flag}</span>
+                <div class="champ-name">{champTeam.name}</div>
               {:else}
-                <div class="champ-tbd">Pick HF Team</div>
+                <div class="champ-tbd">Wähle alle Runden</div>
               {/if}
             {:else}
               <span class="champ-flag">🌍</span>
